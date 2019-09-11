@@ -1,0 +1,16 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+class SubCategoriesSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        factory(App\SubCategory::class, 25)->create();
+    }
+}
