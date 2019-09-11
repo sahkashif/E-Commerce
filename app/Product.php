@@ -35,4 +35,17 @@ class Product extends Model
         return $this->belongsToMany('App\User');
     }
 
+    //return query based random products
+    public function scopeRandomProducts($query)
+    {
+        return $query->where('active', 1)->inRandomOrder();
+    }
+
+    public function saleStartDate(){
+        $this->sale_started_at;
+    }
+
+    public function saleEndDate(){
+        $this->sale_ended_at;
+    }
 }
