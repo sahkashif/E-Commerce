@@ -17,4 +17,10 @@ class Category extends Model
 
         return $this->hasMany('App\SubCategory');
     }
+
+     //return query based random Categories
+     public function scopeRandomCategories($query)
+     {
+         return $query->where('active', 1)->inRandomOrder();
+     }
 }
