@@ -19,7 +19,7 @@
                                 </div>
                                 <div class="product_rating">
                                     <div class="star-ratings">
-                                        <div class="fill-ratings" style="width: 50%;">
+                                        <div class="fill-ratings" style="width: {{ $product->rating() }}%;">
                                             <span>★★★★★</span>
                                         </div>
                                         <div class="empty-ratings">
