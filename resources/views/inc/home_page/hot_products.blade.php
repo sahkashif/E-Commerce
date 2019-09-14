@@ -9,26 +9,15 @@
                         </div>
                         <div class="product_tab_btn">
                             <ul class="nav" role="tablist">
+                                @foreach ($hotCategories as $category)
                                 <li>
-                                    <a class="active" data-toggle="tab" href="#Watches1" role="tab" aria-controls="Watches1" aria-selected="true"> 
-                                        Watches
+                                    <a class="active" data-toggle="tab" href="#{{ $category->name }}" role="tab" aria-controls="Watches1" aria-selected="true"> 
+                                        {{ $category->name }}
                                     </a>
                                 </li>
-                                <li>
-                                    <a data-toggle="tab" href="#Toys" role="tab" aria-controls="Toys" aria-selected="false">
-                                        Toys
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-toggle="tab" href="#Tablet1" role="tab" aria-controls="Tablet1" aria-selected="false">
-                                        Tablet
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-toggle="tab" href="#Game1" role="tab" aria-controls="Game1" aria-selected="false">
-                                        Game
-                                    </a>
-                                </li>
+                                @endforeach
+                                
+                                
                             </ul>
                         </div>
                     </div>
