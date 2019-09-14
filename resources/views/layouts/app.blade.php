@@ -5,6 +5,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="author" content="Kashif">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Rusu - Electronics eCommerce HTML Template</title>
     <meta name="description" content="">

@@ -41,11 +41,20 @@ class Product extends Model
         return $query->where('active', 1)->inRandomOrder();
     }
 
-    public function saleStartDate(){
-        $this->sale_started_at;
+    //returns rating of product
+    public function rating(){
+        $totalRating = $this->reviews()->sum('rating')*20;
+        $totalNumberOfReview = $this->reviews()->count();
+
+        if($totalNumberOfReview == 0)
+        {
+            $rating =0;
+            return $rating;
+        }
+
+        $rating = $totalRating/$totalNumberOfReview;
+        return $rating;
     }
 
-    public function saleEndDate(){
-        $this->sale_ended_at;
-    }
+    
 }
