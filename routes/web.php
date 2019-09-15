@@ -16,3 +16,5 @@ Route::get('/', 'PagesController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/','MailController@mailVerification');
+Route::get('/subscribed/{email}','SubscriptionController@saveEmail');
