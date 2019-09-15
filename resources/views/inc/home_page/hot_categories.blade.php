@@ -26,9 +26,12 @@
                         </div>
                     </figure>
                 </article> 
+                <br><br>
             </div>
             
+       
         @endforeach
         </div>
-    </div>
 </div>
+
+
