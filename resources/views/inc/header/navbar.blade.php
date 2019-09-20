@@ -11,10 +11,10 @@
         <div class="mega_menu">
             <ul class="mega_menu_inner">
                 @foreach ($categories as $category)
-                <li><a href="#">{{ $category->name }}</a>
+                <li><a href="{{ route('shop.index', ['catgory' => $category->id]) }}">{{ $category->name }}</a>
                     <ul>
                         @foreach ($category->subcategories()->get() as $subcategory)
-                            <li><a href="shop-fullwidth.html">{{ $subcategory->name }}</a></li>
+                            <li><a href="{{ route('shop.index', ['subcatgory' => $subcategory->id]) }}">{{ $subcategory->name }}</a></li>
                         @endforeach
                     </ul>
                 </li>

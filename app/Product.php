@@ -41,6 +41,8 @@ class Product extends Model
         return $query->where('active', 1)->inRandomOrder();
     }
 
+    
+
     //returns rating of product
     public function rating(){
         $totalRating = $this->reviews()->sum('rating')*20;
