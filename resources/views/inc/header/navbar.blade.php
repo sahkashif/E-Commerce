@@ -1,20 +1,17 @@
 <ul>
-    <li><a class="active"  href="index.html">home<i class="fa fa-angle-down"></i></a>
-        <ul class="sub_menu">
-            <li><a href="index.html">Home shop 1</a></li>
-            <li><a href="index-2.html">Home shop 2</a></li>
-            <li><a href="index-3.html">Home shop 3</a></li>
-            <li><a href="index-4.html">Home shop 4</a></li>
-        </ul>
+    <li>
+        <a class="active"  href="/">home</a>
     </li>
-    <li class="mega_items"><a href="shop.html">shop<i class="fa fa-angle-down"></i></a> 
+    <li class="mega_items"><a href="{{ route('shop.index') }}">shop<i class="fa fa-angle-down"></i></a> 
         <div class="mega_menu">
             <ul class="mega_menu_inner">
                 @foreach ($categories as $category)
-                <li><a href="{{ route('shop.index', ['catgory' => $category->id]) }}">{{ $category->name }}</a>
+                <li><a href="{{ route('shop.index', ['category' => $category->id]) }}">{{ $category->name }}</a>
                     <ul>
                         @foreach ($category->subcategories()->get() as $subcategory)
-                            <li><a href="{{ route('shop.index', ['subcatgory' => $subcategory->id]) }}">{{ $subcategory->name }}</a></li>
+                            <li>
+                                <a href="{{ route('shop.index', ['subcategory' => $subcategory->id]) }}">{{ $subcategory->name }}</a>
+                            </li>
                         @endforeach
                     </ul>
                 </li>

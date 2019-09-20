@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 
 class ShopController extends Controller
 {
@@ -13,7 +14,23 @@ class ShopController extends Controller
      */
     public function index()
     {
-        //
+        if(request()->category){
+            $products = Product::with('category')->whereHas('category', function($query){
+                $query->where('id', request()->category);
+            })->paginate(12);
+        }
+        else if(request()->subcategory){
+            $products = Product::with('sub_category')->whereHas('sub_category', function($query){
+                $query->where('id', request()->subcategory);
+            })->paginate(12);
+        }
+        else{
+            $products = Product::randomProducts()->paginate(12);
+        }
+        
+        return view('shop')->with([
+            'products' => $products
+        ]);
     }
 
     /**

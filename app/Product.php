@@ -16,12 +16,12 @@ class Product extends Model
     }
 
      //category relationship
-     public function categories(){
+     public function category(){
         return $this->belongsTo('App\Category');
     }
 
     //subcategory relationship
-    public function sub_categories(){
+    public function sub_category(){
             return $this->belongsTo('App\SubCategory');
     }
 
@@ -56,6 +56,14 @@ class Product extends Model
 
         $rating = $totalRating/$totalNumberOfReview;
         return $rating;
+    }
+
+    //checks if the product is on sale
+    public function is_sale(){
+        if($this->present_price < $this->price){
+            return 1;
+        }
+        return 0;
     }
 
     
