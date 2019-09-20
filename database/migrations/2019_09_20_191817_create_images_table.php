@@ -17,7 +17,16 @@ class CreateImagesTable extends Migration
             $table->bigIncrements('id');
             $table->binary('img')->nullable();
             $table->unsignedBigInteger('product_id')->nullable();
+            $table->unsignedBigInteger('color_id')->nullable();
             $table->timestamps();
+            
+
+            
+            $table->foreign('color_id')
+                ->references('id')
+                ->on('colors')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->foreign('product_id')
                 ->references('id')
