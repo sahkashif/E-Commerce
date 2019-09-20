@@ -16,16 +16,12 @@
                                     </div>
                                 </div>
                                 <div class="subscribe_form">
-                                    <form id="mc-form" class="mc-form footer-newsletter" >
-                                        <input id="mc-email" type="email" autocomplete="off" placeholder="Your email address..." />
-                                        <button id="mc-submit">Subscribe</button>
+                                    <form  class="footer-newsletter" method="POST" action="/">
+                                        @csrf
+                                        <input  type="email" autocomplete="off" name="emailField" placeholder="Your email address..." data-validate="validate(required, email)" required/>
+                                        <button type="submit">Subscribe</button>
                                     </form>
-                                    <!-- mailchimp-alerts Start -->
-                                    <div class="mailchimp-alerts text-centre">
-                                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                                        <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                                        <div class="mailchimp-error"></div><!-- mailchimp-error end -->
-                                    </div><!-- mailchimp-alerts end -->
+                                    
                                 </div>
                             </div>
                         </div>
