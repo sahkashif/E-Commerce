@@ -21,7 +21,7 @@ class Product extends Model
     }
 
     //subcategory relationship
-    public function sub_category(){
+    public function subcategory(){
             return $this->belongsTo('App\SubCategory');
     }
 
@@ -66,5 +66,13 @@ class Product extends Model
         return 0;
     }
 
+    public function scopeThiscategory($query, $category){
+        return $query->where('category_id', $category);
+    }
+
+
+    public function scopeThissubcategory($query, $subcategory){
+        return $query->where('sub_category_id', $subcategory);
+    }
     
 }

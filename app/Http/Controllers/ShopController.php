@@ -15,22 +15,46 @@ class ShopController extends Controller
     public function index()
     {
         if(request()->category){
-            $products = Product::with('category')->whereHas('category', function($query){
-                $query->where('id', request()->category);
-            })->paginate(12);
+            $products = Product::thiscategory(request()->category)->paginate(12)->appends('category', request()->category);
         }
         else if(request()->subcategory){
-            $products = Product::with('sub_category')->whereHas('sub_category', function($query){
-                $query->where('id', request()->subcategory);
-            })->paginate(12);
+            $products = Product::thissubcategory(request()->subcategory)->paginate(12)->appends('sub_category', request()->subcategory);
         }
         else{
             $products = Product::randomProducts()->paginate(12);
         }
-        
+
         return view('shop')->with([
             'products' => $products
         ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function filter(Request $request)
+    {
+        $request->validate([
+            'min' => 'required',
+            'max' => 'required'
+        ]);
+        if(request()->category){   
+            $products=whereBetween('present_price', [ $request->input('min'), $request->input('max')])
+                        ->paginate(12);
+        }
+        else if(request()->subcategory){
+            $products=Product::whereBetween('present_price', [ $request->input('min'), $request->input('max')])
+                        ->paginate(12);
+        }
+        else{
+            $products=Product::whereBetween('present_price', [ $request->input('min'), $request->input('max')])
+                                ->randomProducts()->paginate(12);
+        }
+
+        return view('shop.index')->with(['products'=> $products]);
     }
 
     /**

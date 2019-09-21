@@ -22,4 +22,5 @@ Route::get('/subscribed/{email}','SubscriptionController@saveEmail');
 
 Route::prefix('shop')->group(function () {
     Route::get('/', 'ShopController@index')->name('shop.index');
+    Route::post('/', 'ShopController@filter')->name('shop.filter');
 });

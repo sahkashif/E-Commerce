@@ -23,12 +23,60 @@
         </div>
         <div class="widget_list widget_filter">
             <h3>Filter by price</h3>
-            <form action="#"> 
-                <div id="slider-range"></div>   
-                <button type="submit">Filter</button>
-                <input type="text" name="text" id="amount" />   
-
-            </form> 
+            <ul>
+                <li>
+                    <span>
+                        <a>
+                            <span>Under $25</span>
+                        </a>
+                    </span>
+                </li>
+                <li>
+                    <span>
+                        <a>
+                            <span>$25 to $50</span>
+                        </a>
+                    </span>
+                </li>
+                <li>
+                    <span>
+                        <a>
+                            <span>$50 to $100</span>
+                        </a>
+                    </span>
+                </li>
+                <li>
+                    <span>
+                            <a>
+                            <span>$100 to $200</span>
+                        </a>
+                    </span>
+                </li>
+                <li>
+                    <span>
+                        <a >
+                            <span>$200 &amp; Above</span>
+                        </a>
+                    </span>
+                </li>
+                <li>
+                    <form method="post" action="{{ route('shop.filter') }}" class="form-group">
+                        @csrf
+                        <div class="form-row">
+                            <div class="col">
+                                <input type="number" class="form-control" placeholder="min" name="low-price">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="max" name="high-price">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-row align-middle">
+                        <button class="button col" type="submit">GO</button>
+                        </div>
+                    </form>
+                </li>    
+            </ul>
         </div>
         <div class="widget_list">
             <h3>Compare Products</h3>
