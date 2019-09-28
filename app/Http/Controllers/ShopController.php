@@ -18,8 +18,13 @@ class ShopController extends Controller
     {
         $products = new Product; 
         
-        if( request()->has('lowPrice') && request()->has('highPrice')){
-            $products = $products->where('present_price', '>=', request()->lowPrice)->where('present_price', '<=', request()->highPrice);
+       
+        if( request()->has('lowPrice')){
+            $products = $products->where('present_price', '>=', request()->lowPrice);
+        }
+
+        if( request()->has('highPrice')){
+            $products = $products->where('present_price', '<=', request()->highPrice);
         }
 
         $products = $products->randomProducts()->paginate(12)->appends(['present_price'=> request()->highPrice,
@@ -40,12 +45,18 @@ class ShopController extends Controller
         $products = new Product;
         $products=$products->thisCategory($id);
 
-        if( request()->has('lowPrice') && request()->has('highPrice')){
-            $products = $products->where('present_price', '>=', request()->lowPrice)->where('present_price', '<=', request()->highPrice);
+        if( request()->has('lowPrice')){
+            $products = $products->where('present_price', '>=', request()->lowPrice);
+        }
+
+        if( request()->has('highPrice')){
+            $products = $products->where('present_price', '<=', request()->highPrice);
         }
 
         $products = $products->randomProducts()->paginate(12)->appends(['present_price'=> request()->highPrice,
                                                                         'present_price'=> request()->lowPrice]);
+
+        
         
         return view('shop')->with([
             'products' => $products
@@ -62,8 +73,12 @@ class ShopController extends Controller
         $products = new Product;
         $products=$products->thissubcategory($id);
 
-        if( request()->has('lowPrice') && request()->has('highPrice')){
-            $products = $products->where('present_price', '>=', request()->lowPrice)->where('present_price', '<=', request()->highPrice);
+        if( request()->has('lowPrice')){
+            $products = $products->where('present_price', '>=', request()->lowPrice);
+        }
+
+        if( request()->has('highPrice')){
+            $products = $products->where('present_price', '<=', request()->highPrice);
         }
 
         $products = $products->randomProducts()->paginate(12)->appends(['present_price'=> request()->highPrice,
@@ -72,6 +87,8 @@ class ShopController extends Controller
             'products' => $products
         ]);
     }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -102,7 +119,8 @@ class ShopController extends Controller
      */
     public function show($id)
     {
-        //
+        $product=Product::find($id)->get();
+        return view('product')->with(['product' => $product]);
     }
 
     /**

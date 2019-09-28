@@ -52,7 +52,7 @@
                         <article class="single_product">
                             <figure>
                                 <div class="product_name">
-                                    <h4><a href="product-details.html">{{ $product->name }}</a></h4>
+                                    <h4><a href="{{ route('shop.product', $product->id) }}">{{ $product->name }}</a></h4>
                                 </div>
                                 <div class="product_rating">
                                     <div class="star-ratings">
@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
                                 <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product1.jpg" alt=""></a>
+                                    <a class="primary_img" href="{{ route('shop.product', $product->id) }}"><img src="assets/img/product/product1.jpg" alt=""></a>
                                     @if ($product->is_sale() == 1)
                                         <div class="label_product">
                                             <span class="label_sale">Sale!</span>
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="product_content list_content">
                                     <div class="product_name">
-                                            <h4><a href="product-details.html">{{ $product->name }}</a></h4>
+                                            <h4><a href="{{ route('shop.product', $product->id) }}">{{ $product->name }}</a></h4>
                                     </div>
                                     <div class="product_rating">
                                         <div class="star-ratings">

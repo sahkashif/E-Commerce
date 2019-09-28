@@ -24,4 +24,5 @@ Route::prefix('shop')->group(function () {
     Route::get('/', 'ShopController@index')->name('shop.index');
     Route::get('/category/{id}', 'ShopController@category')->name('shop.category');
     Route::get('/subcategory/{id}', 'ShopController@subcategory')->name('shop.subcategory');
+    Route::get('/product/{id}', 'ShopController@show')->name('shop.product');
 });
