@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Category;
+use App\SubCategory;
 
 class ShopController extends Controller
 {
@@ -14,15 +16,14 @@ class ShopController extends Controller
      */
     public function index()
     {
-        if(request()->category){
-            $products = Product::thiscategory(request()->category)->paginate(12)->appends('category', request()->category);
+        $products = new Product; 
+        
+        if( request()->has('lowPrice') && request()->has('highPrice')){
+            $products = $products->where('present_price', '>=', request()->lowPrice)->where('present_price', '<=', request()->highPrice);
         }
-        else if(request()->subcategory){
-            $products = Product::thissubcategory(request()->subcategory)->paginate(12)->appends('sub_category', request()->subcategory);
-        }
-        else{
-            $products = Product::randomProducts()->paginate(12);
-        }
+
+        $products = $products->randomProducts()->paginate(12)->appends(['present_price'=> request()->highPrice,
+                                                                        'present_price'=> request()->lowPrice]);
 
         return view('shop')->with([
             'products' => $products
@@ -30,31 +31,46 @@ class ShopController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function filter(Request $request)
+    public function category($id)
     {
-        $request->validate([
-            'min' => 'required',
-            'max' => 'required'
-        ]);
-        if(request()->category){   
-            $products=whereBetween('present_price', [ $request->input('min'), $request->input('max')])
-                        ->paginate(12);
-        }
-        else if(request()->subcategory){
-            $products=Product::whereBetween('present_price', [ $request->input('min'), $request->input('max')])
-                        ->paginate(12);
-        }
-        else{
-            $products=Product::whereBetween('present_price', [ $request->input('min'), $request->input('max')])
-                                ->randomProducts()->paginate(12);
+        $products = new Product;
+        $products=$products->thisCategory($id);
+
+        if( request()->has('lowPrice') && request()->has('highPrice')){
+            $products = $products->where('present_price', '>=', request()->lowPrice)->where('present_price', '<=', request()->highPrice);
         }
 
-        return view('shop.index')->with(['products'=> $products]);
+        $products = $products->randomProducts()->paginate(12)->appends(['present_price'=> request()->highPrice,
+                                                                        'present_price'=> request()->lowPrice]);
+        
+        return view('shop')->with([
+            'products' => $products
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function subcategory($id)
+    {
+        $products = new Product;
+        $products=$products->thissubcategory($id);
+
+        if( request()->has('lowPrice') && request()->has('highPrice')){
+            $products = $products->where('present_price', '>=', request()->lowPrice)->where('present_price', '<=', request()->highPrice);
+        }
+
+        $products = $products->randomProducts()->paginate(12)->appends(['present_price'=> request()->highPrice,
+                                                                        'present_price'=> request()->lowPrice]);
+        return view('shop')->with([
+            'products' => $products
+        ]);
     }
 
     /**

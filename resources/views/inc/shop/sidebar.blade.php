@@ -5,17 +5,17 @@
                 @foreach ($categories as $category)
                     @if ($category->subcategories()->count() > 0)
                     
-                        <li class="widget_sub_categories"><a href="JavaScript:void(0);">{{ $category->name }}</a>
+                        <li class="font-weight-bold">{{ $category->name }}</a>
                             
-                            <ul class="widget_dropdown_categories">
+                            <ul class="font-weight-normal">
                                 @foreach ($category->subcategories()->get() as $subcategory)
-                                    <li><a href="{{ route('shop.index', ['subcategory' => $subcategory->id]) }}">{{ $subcategory->name }}</a></li>
+                                    <li><a href="{{ route('shop.subcategory', $subcategory->id) }}">{{ $subcategory->name }}</a></li>
                                 @endforeach
                             </ul>
                            
                         </li>
                     @else
-                        <li><a href="{{ route('shop.index', ['category' => $category->id]) }}">{{ $category->name }}</a></li>
+                        <li class="font-weight-bold"><a href="{{ route('shop.category', $category->id) }}">{{ $category->name }}</a></li>
                     @endif
                     
                 @endforeach
@@ -60,21 +60,31 @@
                     </span>
                 </li>
                 <li>
-                    <form method="post" action="{{ route('shop.filter') }}" class="form-group">
-                        @csrf
+                    
+                    <form id="priceFilter" class="form-group" method="GET">  
                         <div class="form-row">
                             <div class="col">
-                                <input type="number" class="form-control" placeholder="min" name="low-price">
+                                <input type="number" class="form-control" placeholder="min" name="lowPrice">
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="max" name="high-price">
+                                <input type="number" class="form-control" placeholder="max" name="highPrice">
                             </div>
                         </div>
                         <br>
                         <div class="form-row align-middle">
+                        
                         <button class="button col" type="submit">GO</button>
                         </div>
                     </form>
+                    <script>
+                        const priceFiler= document.getElementById("priceFilter");
+                        var lowPrice= document.getElementByName("lowPrice").value;
+                        var highPrice= document.getElementByName("highPrice").value;
+                        priceFiler.addEventListener("submit", function () {
+                            event.preventDefault();
+                            location.href=location.href+"&lowPrice="+lowPrice+"&highPrice="+highPrice;
+                        })
+                    </script>
                 </li>    
             </ul>
         </div>

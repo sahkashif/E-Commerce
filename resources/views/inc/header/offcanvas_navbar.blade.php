@@ -10,13 +10,13 @@
                         <li class="menu-item-has-children"><a href="{{ route('shop.index', ['category' => $category->id]) }}">{{ $category->name }}</a>
                             <ul class="sub-menu">
                                 @foreach ($category->subcategories()->get() as $subcategory)
-                                    <li><a href="{{ route('shop.index', ['subcategory' => $subcategory->id]) }}">{{ $subcategory->name }}</a></li>
+                                    <li><a href="{{ route('shop.subcategory', $subcategory->id) }}">{{ $subcategory->name }}</a></li>
                                 @endforeach
                             </ul>
                         </li>
                     @else
                         <li class="menu-item-has-children">
-                            <a href="{{ route('shop.index', ['category' => $category->id]) }}">{{ $category->name }}</a>
+                            <a href="{{ route('shop.category', $category->id) }}">{{ $category->name }}</a>
                         </li>
                     @endif
                 @endforeach
