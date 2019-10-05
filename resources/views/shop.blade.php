@@ -73,7 +73,7 @@
                                     @endif
                                     
                                     <div class="quick_button">
-                                        <a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> Quick View</a>
+                                        <a href="#" data-toggle="modal" data-target="#modal_box-{{ $product->id }}"  title="quick view"> Quick View</a>
                                     </div>
                                 </div>
                                 <div class="product_footer product_content grid_content">
@@ -133,6 +133,9 @@
                             </figure>
                         </article>
                     </div>
+                    <!-- modal area start-->
+                    @include('inc.product_modal')
+                    <!-- modal area end-->
                     @endforeach
                 </div>
 

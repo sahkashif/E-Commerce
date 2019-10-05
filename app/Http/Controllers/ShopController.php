@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Color;
 use App\Category;
 use App\SubCategory;
 
@@ -119,8 +120,30 @@ class ShopController extends Controller
      */
     public function show($id)
     {
-        $product=Product::find($id)->get();
-        return view('product')->with(['product' => $product]);
+        $product=Product::find($id);
+        if(request()->color){
+            $imgs=Product::find($id)->colors()->filteredColor(request()->color)->imgs()->get();
+        }
+        else{
+            $imgs=Product::find($id)->colors()->defaultColor()->first()->imgs()->get(); 
+        }
+        //$imgs=Product::find($id)->colors()->defaultColor()->first()->imgs()->get();
+        
+        //$color=$color->load('imgs');
+        
+        //dd($default->toArray());
+        /*$default=$product->with(['imgs' => function($query){
+            $query->where('color_id', $color->id);
+        }])->get();*/
+        
+        
+
+        //$colors= $colors->where('product_id', $id)->where('default_color',1)->first();
+        
+        //$defaultColor=$colors->where('product_id', $id)->defaultColor()->filteredImgs();
+       
+       
+        return view('product')->with(['product' => $product, 'imgs'=> $imgs]);
     }
 
     /**

@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_box" tabindex="-1" role="dialog"  aria-hidden="true">
+<div class="modal fade" id="modal_box-{{ $product->id }}" data-id="{!! $product->id !!}" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -53,7 +53,7 @@
                             <div class="col-lg-7 col-md-7 col-sm-12">
                                 <div class="modal_right">
                                     <div class="modal_title mb-10">
-                                        <h2>Sit voluptatem rhoncus sem lectus</h2> 
+                                        <h2>{{ $product->name }}</h2> 
                                     </div>
                                     <div class="modal_price mb-10">
                                         <span class="new_price">$64.99</span>    

@@ -136,9 +136,7 @@
         </footer>
         <!--footer area end-->
        
-        <!-- modal area start-->
-        @include('inc.footer.modal')
-        <!-- modal area end-->
+        
         
         <!--news letter popup start-->
          @include('inc.footer.popup_newsletter')
