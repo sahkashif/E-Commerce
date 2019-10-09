@@ -37,7 +37,7 @@ class ShopController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the categorized resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -65,7 +65,7 @@ class ShopController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the sub-categorized resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -127,23 +127,17 @@ class ShopController extends Controller
         else{
             $imgs=Product::find($id)->colors()->defaultColor()->first()->imgs()->get(); 
         }
-        //$imgs=Product::find($id)->colors()->defaultColor()->first()->imgs()->get();
-        
-        //$color=$color->load('imgs');
-        
-        //dd($default->toArray());
-        /*$default=$product->with(['imgs' => function($query){
-            $query->where('color_id', $color->id);
-        }])->get();*/
-        
-        
 
-        //$colors= $colors->where('product_id', $id)->where('default_color',1)->first();
+        $subcategory_id = $product->sub_category_id;
+        $category_id = $product->category_id;
         
-        //$defaultColor=$colors->where('product_id', $id)->defaultColor()->filteredImgs();
-       
-       
-        return view('product')->with(['product' => $product, 'imgs'=> $imgs]);
+        $relatedProducts = Product::where('sub_category_id',  $subcategory_id)->randomProducts()->get();  
+        $upsellProducts = Product::where('category_id',$category_id)->where('id','!=', $id)->saleProducts()->get();
+         
+        return view('product')->with(['product' => $product, 
+                                    'imgs'=> $imgs,
+                                    'relatedProducts' => $relatedProducts,
+                                    'upsellProducts' => $upsellProducts]);
     }
 
     /**

@@ -16,7 +16,7 @@
         </div>         
     </div>
     <!--breadcrumbs area end-->
-        
+    @include('inc.message')
     <!--product details start-->
     <div class="product_details mt-45 mb-50">
         <div class="container">
@@ -48,15 +48,15 @@
                             <h3><a href="{{ route('shop.product', $product->id) }}">{{ $product->name }}</a></h3>
                             
                             <div class="product_rating">
-                                    <div class="star-ratings">
-                                        <div class="fill-ratings" style="width: {{ $product->rating() }}%;">
-                                            <span>★★★★★</span>
-                                        </div>
-                                        <div class="empty-ratings">
-                                            <span>★★★★★</span>
-                                        </div>
+                                <div class="star-ratings">
+                                    <div class="fill-ratings" style="width: {{ $product->rating() }}%;">
+                                        <span>★★★★★</span>
+                                    </div>
+                                    <div class="empty-ratings">
+                                        <span>★★★★★</span>
                                     </div>
                                 </div>
+                            </div>
                             <div class="price_box">
                                 @if ($product->is_sale()==1)
                                 <span class="current_price">${{ $product->price }}</span>
@@ -117,7 +117,7 @@
     
     @include('inc.product.info')
     
-    @include('inc.product.related_products')
+    @include('inc.product.relatedProducts')
     
     @include('inc.product.upsell_products')
 @endsection

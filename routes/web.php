@@ -26,3 +26,11 @@ Route::prefix('shop')->group(function () {
     Route::get('/subcategory/{id}', 'ShopController@subcategory')->name('shop.subcategory');
     Route::get('/product/{id}', 'ShopController@show')->name('shop.product');
 });
+
+Route::prefix('cart')->group(function(){
+    Route::get('/', 'CartController@index')->name('cart.index');
+    Route::post('/{product}/add', 'CartController@store')->name('cart.add');
+    Route::delete('/{product}/delete', 'CartController@destroy')->name('cart.delete');
+    Route::post('/{product}/update', 'CartController@update')->name('cart.update');
+    Route::delete('/', 'CartController@clearCart')->name('cart.clear');
+});

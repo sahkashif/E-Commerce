@@ -12,22 +12,22 @@
                                     <div class="tab-content product-details-large">
                                         <div class="tab-pane fade show active" id="tab1" role="tabpanel" >
                                             <div class="modal_tab_img">
-                                                <a href="#"><img src="assets/img/product/productbig5.jpg" alt=""></a>    
+                                                <a href="#"><img src="{{ asset('img/product/productbig5.jpg') }}" alt=""></a>    
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="tab2" role="tabpanel">
                                             <div class="modal_tab_img">
-                                                <a href="#"><img src="assets/img/product/productbig4.jpg" alt=""></a>    
+                                                <a href="#"><img src="{{ asset('img/product/productbig4.jpg') }}" alt=""></a>    
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="tab3" role="tabpanel">
                                             <div class="modal_tab_img">
-                                                <a href="#"><img src="assets/img/product/productbig3.jpg" alt=""></a>    
+                                                <a href="#"><img src="{{ asset('img/product/productbig3.jpg') }}" alt=""></a>    
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="tab4" role="tabpanel">
                                             <div class="modal_tab_img">
-                                                <a href="#"><img src="assets/img/product/productbig2.jpg" alt=""></a>    
+                                                <a href="#"><img src="{{ asset('img/product/productbig2.jpg') }}" alt=""></a>    
                                             </div>
                                         </div>
                                     </div>

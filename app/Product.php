@@ -41,7 +41,11 @@ class Product extends Model
         return $query->where('active', 1)->inRandomOrder();
     }
 
-    
+    //return query based on sale random products
+    public function scopeSaleProducts($query)
+    {
+        return $query->where('present_price','<', 'price')->randomProducts();
+    }
 
     //returns rating of product
     public function rating(){
