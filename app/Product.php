@@ -16,12 +16,12 @@ class Product extends Model
     }
 
      //category relationship
-     public function categories(){
+     public function category(){
         return $this->belongsTo('App\Category');
     }
 
     //subcategory relationship
-    public function sub_categories(){
+    public function subcategory(){
             return $this->belongsTo('App\SubCategory');
     }
 
@@ -41,6 +41,12 @@ class Product extends Model
         return $query->where('active', 1)->inRandomOrder();
     }
 
+    //return query based on sale random products
+    public function scopeSaleProducts($query)
+    {
+        return $query->where('present_price','<', 'price')->randomProducts();
+    }
+
     //returns rating of product
     public function rating(){
         $totalRating = $this->reviews()->sum('rating')*20;
@@ -56,5 +62,27 @@ class Product extends Model
         return $rating;
     }
 
+    //checks if the product is on sale
+    public function is_sale(){
+        if($this->present_price < $this->price){
+            return 1;
+        }
+        return 0;
+    }
+
+    //default color_id
+    public function default_color(){
+        $id=$this->colors()->defaultColor()->first();
+        return $id;
+    }
+
+    public function scopeThiscategory($query, $category){
+        return $query->where('category_id', $category);
+    }
+
+
+    public function scopeThissubcategory($query, $subcategory){
+        return $query->where('sub_category_id', $subcategory);
+    }
     
 }

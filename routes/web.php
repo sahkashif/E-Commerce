@@ -18,3 +18,23 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/','MailController@mailVerification');
 Route::get('/subscribed/{email}','SubscriptionController@saveEmail');
+
+
+Route::prefix('shop')->group(function () {
+    Route::get('/', 'ShopController@index')->name('shop.index');
+    Route::get('/category/{id}', 'ShopController@category')->name('shop.category');
+    Route::get('/subcategory/{id}', 'ShopController@subcategory')->name('shop.subcategory');
+    Route::get('/product/{id}', 'ShopController@show')->name('shop.product');
+});
+
+Route::prefix('cart')->group(function(){
+    Route::get('/', 'CartController@index')->name('cart.index');
+    Route::post('/add/{product}', 'CartController@store')->name('cart.add');
+    Route::delete('/delete/{product}', 'CartController@destroy')->name('cart.delete');
+    Route::post('/{product}/update', 'CartController@update')->name('cart.update');
+    Route::delete('/', 'CartController@clearCart')->name('cart.clear');
+    Route::get('/checkout', 'CartController@checkout')->name('cart.checkout');
+});
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

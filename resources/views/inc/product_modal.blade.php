@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_box" tabindex="-1" role="dialog"  aria-hidden="true">
+<div class="modal fade" id="modal_box-{{ $product->id }}" data-id="{!! $product->id !!}" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -12,22 +12,22 @@
                                     <div class="tab-content product-details-large">
                                         <div class="tab-pane fade show active" id="tab1" role="tabpanel" >
                                             <div class="modal_tab_img">
-                                                <a href="#"><img src="assets/img/product/productbig5.jpg" alt=""></a>    
+                                                <a href="#"><img src="{{ asset('img/product/productbig5.jpg') }}" alt=""></a>    
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="tab2" role="tabpanel">
                                             <div class="modal_tab_img">
-                                                <a href="#"><img src="assets/img/product/productbig4.jpg" alt=""></a>    
+                                                <a href="#"><img src="{{ asset('img/product/productbig4.jpg') }}" alt=""></a>    
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="tab3" role="tabpanel">
                                             <div class="modal_tab_img">
-                                                <a href="#"><img src="assets/img/product/productbig3.jpg" alt=""></a>    
+                                                <a href="#"><img src="{{ asset('img/product/productbig3.jpg') }}" alt=""></a>    
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="tab4" role="tabpanel">
                                             <div class="modal_tab_img">
-                                                <a href="#"><img src="assets/img/product/productbig2.jpg" alt=""></a>    
+                                                <a href="#"><img src="{{ asset('img/product/productbig2.jpg') }}" alt=""></a>    
                                             </div>
                                         </div>
                                     </div>
@@ -53,7 +53,7 @@
                             <div class="col-lg-7 col-md-7 col-sm-12">
                                 <div class="modal_right">
                                     <div class="modal_title mb-10">
-                                        <h2>Sit voluptatem rhoncus sem lectus</h2> 
+                                        <h2>{{ $product->name }}</h2> 
                                     </div>
                                     <div class="modal_price mb-10">
                                         <span class="new_price">$64.99</span>    

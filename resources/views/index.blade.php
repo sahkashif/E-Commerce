@@ -49,7 +49,7 @@
                         </div>
                         <div class="shipping_content">
                             <h4>Member Discount</h4>
-                            <p>Onevery order over $120.00</p>
+                            <p>Onevery order over &#2547 20000.00</p>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,6 @@
         </div>
     </div>
     <!--shipping area end-->
-    
     <!--banner area start-->
     <div class="banner_area mb-45">
         <div class="container">
@@ -65,21 +64,21 @@
                 <div class="col-lg-4 col-md-4">
                     <figure class="single_banner">
                         <div class="banner_thumb">
-                            <a href="shop.html"><img src={{ asset('img/bg/banner1.jpg') }} alt=""></a>
+                            <a href="/shop"><img src={{ asset('img/bg/banner1.png') }} alt=""></a>
                         </div>
                     </figure>
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <figure class="single_banner">
                         <div class="banner_thumb">
-                            <a href="shop.html"><img src={{ asset('img/bg/banner2.jpg') }} alt=""></a>
+                            <a href="/shop"><img src={{ asset('img/bg/banner2.png') }} alt=""></a>
                         </div>
                     </figure>
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <figure class="single_banner">
                         <div class="banner_thumb">
-                            <a href="shop.html"><img src={{ asset('img/bg/banner3.jpg') }} alt=""></a>
+                            <a href="/shop"><img src={{ asset('img/bg/banner3.png') }} alt=""></a>
                         </div>
                     </figure>
                 </div>
@@ -99,14 +98,14 @@
                 <div class="col-lg-6 col-md-6">
                     <figure class="single_banner">
                         <div class="banner_thumb">
-                            <a href="shop.html"><img src={{ asset('img/bg/banner4.jpg') }} alt=""></a>
+                            <a href="shop.html"><img src={{ asset('img/bg/banner4.png') }} alt=""></a>
                         </div>
                     </figure>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <figure class="single_banner">
                         <div class="banner_thumb">
-                            <a href="shop.html"><img src={{ asset('img/bg/banner5.jpg') }} alt=""></a>
+                            <a href="shop.html"><img src={{ asset('img/bg/banner5.png') }} alt=""></a>
                         </div>
                     </figure>
                 </div>
@@ -128,36 +127,5 @@
     @include('inc.home_page.hot_products')
     <!--product area end-->
 
-    <!--brand area start-->
-    <div class="brand_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="brand_container owl-carousel">
-                        <div class="single_brand">
-                            <a href="#"><img src={{ asset('img/brand/brand1.jpg') }} alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src={{ asset('img/brand/brand2.jpg') }} alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src={{ asset('img/brand/brand3.jpg') }} alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src={{ asset('img/brand/brand4.jpg') }} alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src={{ asset('img/brand/brand5.jpg') }} alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="assets/img/brand/brand2.jpg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--brand area end-->
-
+   
 @endsection
-    

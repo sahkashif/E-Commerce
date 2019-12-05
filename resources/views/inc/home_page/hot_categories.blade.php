@@ -17,18 +17,21 @@
                             <a class="primary_img" href="shop.html"><img src="assets/img/custom-p/product1.jpg" alt=""></a>
                         </div>
                         <div class="categories_product_content">
-                            <h4><a href="shop.html">{{ $category->name }}</a></h4>
+                            <h4><a href="{{ route('shop.index', ['category' => $category->id]) }}">{{ $category->name }}</a></h4>
                             <ul>
                                 @foreach ($category->subcategories()->get() as $subcategory)
-                                    <li><a href="#">{{ $subcategory->name }}</a></li>
+                                    <li><a href="{{ route('shop.index', ['subcategory' => $subcategory->id]) }}">{{ $subcategory->name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
                     </figure>
                 </article> 
+                <br><br>
             </div>
             
+       
         @endforeach
         </div>
-    </div>
 </div>
+
+
