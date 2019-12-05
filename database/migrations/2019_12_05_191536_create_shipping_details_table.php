@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShippingsTable extends Migration
+class CreateShippingDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateShippingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('shippings', function (Blueprint $table) {
+        Schema::create('shipping_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('order_id');
-            $table->boolean('inside_dhaka');
+            $table->unsignedBigInteger('shipping_methods_id');
             $table->string('address');
             $table->string('city');
             $table->string('postal_code');
+            $table->string('status');
+            $table->string('notes')->nullable();
             $table->timestamps();
 
             
@@ -36,6 +38,12 @@ class CreateShippingsTable extends Migration
                 ->on('orders')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
+            $table->foreign('shipping_methods_id')
+                ->references('id')
+                ->on('shipping_methods')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
@@ -46,6 +54,6 @@ class CreateShippingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shippings');
+        Schema::dropIfExists('shipping_details');
     }
 }

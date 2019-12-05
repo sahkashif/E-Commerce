@@ -26,7 +26,8 @@
     <!-- Main Style CSS -->
     <link rel="stylesheet" href={{asset('css/style.css')}}>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    
 </head>
 
 <body>

@@ -11,6 +11,8 @@ class Cart
 {
     public $numOfItems=0;
     public $totalPrice=0;
+    public $shippingCharge = 0;
+    public $grandTotal = 0;
     public $items = null;
 
     public function _construct(){

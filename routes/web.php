@@ -37,4 +37,10 @@ Route::prefix('cart')->group(function(){
 });
 Auth::routes();
 
+
+Route::group(['prefix' => 'checkout',  'middleware' => 'cart'], function(){
+    Route::post('/', 'CheckoutController@index')->name('checkout.index');
+    //Route::put('/scheduler', 'CheckoutController@update')->name('admin.scheduler.update');
+});
+
 Route::get('/home', 'HomeController@index')->name('home');

@@ -4,7 +4,7 @@
     <!--slider area start-->
     @include('inc.home_page.slider')
     <!--slider area end-->
-    
+    @include('inc.message')
     <!--shipping area start-->
     <div class="shipping_area mb-50">
         <div class="container">

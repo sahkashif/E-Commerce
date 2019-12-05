@@ -15,12 +15,13 @@ class CreatePaymentDetailsTable extends Migration
     {
         Schema::create('payment_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
+            $table->string('transection_id');
             $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('payment_method_id');
-            $table->unsignedBigInteger('shipping_id');
-            $table->decimal('total');
+            $table->decimal('payable_amount', 10,3);
             $table->boolean('status');
+            $table->string('notes')->nullable();
             $table->timestamps();
 
             
@@ -42,11 +43,6 @@ class CreatePaymentDetailsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
                 
-            $table->foreign('shipping_id')
-                ->references('id')
-                ->on('shippings')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
         });
     }
 

@@ -3,7 +3,8 @@
 <!--shopping cart area start -->
 <div class="shopping_cart_area mt-45">
     <div class="container">  
-        <form action="#"> 
+        <form action="{{ route('checkout.index') }}" method="POST">
+            @csrf 
             <div class="row">
                 <div class="col-12">
                     <div class="table_desc">
@@ -24,11 +25,9 @@
                                     @foreach ($products as $product)
                                     <tr>
                                         <td class="product_remove">
-                                            <form class="form-group" action="{{ route('cart.delete', $product->getItem()['id']) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
+                                            
                                                 <button type="submit"><i class="fa fa-trash-o"></i></button>
-                                            </form>
+                                            
                                             
                                         </td>
                                         <td class="product_thumb"><a href="#"><img src="data:image/png;base64,{{ chunk_split(base64_encode($images->where('product_id', $product->getItem()['id'])->where('color_id',$product->getColor()->toArray()['id'])->pluck(['img'])->first())) }}" alt=""></a></td>
@@ -66,22 +65,40 @@
                         <div class="coupon_code right">
                             <h3>Cart Totals</h3>
                             <div class="coupon_inner">
+                                <div class="cart_subtotal ">
+                                    <div class="btn-group btn-group-toggle">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="shipping" id="inlineRadio1" value="200" required>
+                                            <label class="form-check-label"><h4 class="h6 text-dark">Inside Dhaka</h4></label>
+                                        </div>
+                                                
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="shipping" id="inlineRadio2" value="300">
+                                            <label class="form-check-label"><h4 class="h6 text-dark">Outside Dhaka</h4></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
                                 <div class="cart_subtotal">
                                     <p>Subtotal</p>
-                                    <p class="cart_amount">£215.00</p>
+                                    <p class="cart_amount">&#2547 {{ $total }}</p>
                                 </div>
-                                <div class="cart_subtotal ">
+                                <div class="cart_subtotal">
                                     <p>Shipping</p>
-                                    <p class="cart_amount"><span>Flat Rate:</span> £255.00</p>
+                                    <p class="cart_amount" id="ship">Please Select a Shipping Area</p>
                                 </div>
-                                <a href="#">Calculate shipping</a>
+                                
+                               
+                               <hr>
     
                                 <div class="cart_subtotal">
                                     <p>Total</p>
-                                    <p class="cart_amount">${{ $total }}</p>
+                                    <p class="cart_amount" id="total">&#2547 {{ $total }}</p>
                                 </div>
+                                <input type="hidden" name="total" id="total-hidden" value="">
+                                <input type="hidden" name="shippingCharge" id="shippingCharge" value="">
                                 <div class="checkout_btn">
-                                    <a href="#">Proceed to Checkout</a>
+                                    <button type="submit">Proceed to Checkout</a>
                                 </div>
                             </div>
                         </div>
@@ -93,6 +110,22 @@
     </div>     
 </div>
 <!--shopping cart area end -->
+<script>
+ $(document).ready(function(){
+    $("input:radio[name=shipping]").click(function() {
+    $("#ship").css("background-color", "yellow"); // change the color of the background
+    $('#ship').html('&#2547 '+$(this).val());
+
+    var totals = parseInt($(this).val())+{{ $total }};
+    
+    
+    $('#total').html('&#2547 '+totals);
+    $('#shippingCharge').val($(this).val());
+    $('#total-hidden').val(totals);
+    })
+    
+    });
+</script>
 @endsection
 
     
