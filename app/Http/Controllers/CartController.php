@@ -8,7 +8,9 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use App\Product;
 use App\Item;
-use App\cartSession;
+use App\Cart;
+use App\Color;
+use App\Image;
 use Session;
 use Auth;
 
@@ -21,26 +23,38 @@ class CartController extends Controller
      */
     public function index(Request $request)
     {
-        $cart= new cartSession;
+        //Session::forget('cart');
+        $cart= new Cart;
         if(Session::has('cart'))
         {
             $cart=(Session::get('cart'));
             $items=$cart->getitems();
             $products=$items;
             $numOfItems=$cart->numOfItems();
+            $total=$cart->totalPrice();
             
-            return view('pages.cart')->with([
+            //dd($imgs);
+            //$img = Image::where('product_id', )
+            //dd($cart);
+            return view('cart')->with([
                 'products' => $products,
-                'numOfItems' => $numOfItems
+                'numOfItems' => $numOfItems,
+                'total' => $total,
+                
                 ]);
         }
         else
         {
-            $products=null;
+            //dd(Session::has('cart'));
+            $products = null;
             $numOfItems = 0;
-            return view('pages.cart')->with([
+            $total = 0;
+            
+            return view('cart')->with([
                 'products' => $products,
-                'numOfItems' => $numOfItems
+                'numOfItems' => $numOfItems,
+                'total' => $total,
+                
                 ]);
         }
         
@@ -57,12 +71,12 @@ class CartController extends Controller
      */
     public function store(Request $request, $id)
     {
-      
+        
         $product = Product::find($id)->toArray();
         //$stock= Product::find($id)->get('stock')
         $id=Product::find($id,['id']);
-       
-
+        $color_id=Color::whereIn('product_id',$id)->filteredColor($request->color_id);
+        
         if($request->input('quantity'))
         {
             $quantity=$request->input('quantity');
@@ -71,9 +85,10 @@ class CartController extends Controller
             $quantity=1;
         }
         $price=$product['present_price'];
-        $newitem=new Item($id, $quantity, $price, $product);
-        
-        $cart=new cartSession;
+        //dd($price);
+        $newitem=new Item($id, $quantity, $price, $color_id, $product);
+        //dd($newitem->subtotalPrice());
+        $cart=new Cart;
         $oldCart=Session::has('cart') ? Session::get('cart') : $cart;
         $cart=$oldCart;
         
@@ -90,11 +105,17 @@ class CartController extends Controller
             }
         }
        
-        $cart->add($newitem,$id);   
-        $request->session()->put('cart',$cart);
-        
-        return redirect()->back()->with('success', 'Added to Cart');
+        if($product['stock'] > $quantity){
+            $cart->add($newitem,$id);   
+            $request->session()->put('cart',$cart);
+            return redirect()->back()->with('success', 'Added to Cart');
 
+        }
+        else{
+            return redirect()->back()->with('error', 'limit exceed!!');
+        }
+        
+        
     }
 
     
@@ -113,7 +134,7 @@ class CartController extends Controller
         $id=Product::find($id,['id']);
         $quantity = $request->input('quantity');
         //dd($quantity);
-        $cart=new cartSession;
+        $cart=new Cart;
         $oldCart=Session::has('cart') ? Session::get('cart') : $cart;
         $cart=$oldCart;
         $cart->update($id, $quantity);
@@ -131,7 +152,8 @@ class CartController extends Controller
      */
     public function destroy(Request $request,$id)
     {
-        $cart=new cartSession;
+        //dd("hello");
+        $cart=new Cart;
         $oldCart=Session::has('cart') ? Session::get('cart') : $cart;
         $cart=$oldCart;
         $product=Product::find($id)->toArray();
@@ -151,7 +173,7 @@ class CartController extends Controller
                     break;
                 }
             }else{
-                dd("hellow");
+                //dd("hellow");
                 continue;
             }
             
@@ -173,4 +195,5 @@ class CartController extends Controller
         Session::forget('cart');
         return redirect()->back()->with('success', 'Cart cleared');
     }
+
 }

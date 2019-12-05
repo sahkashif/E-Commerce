@@ -29,8 +29,12 @@ Route::prefix('shop')->group(function () {
 
 Route::prefix('cart')->group(function(){
     Route::get('/', 'CartController@index')->name('cart.index');
-    Route::post('/{product}/add', 'CartController@store')->name('cart.add');
-    Route::delete('/{product}/delete', 'CartController@destroy')->name('cart.delete');
+    Route::post('/add/{product}', 'CartController@store')->name('cart.add');
+    Route::delete('/delete/{product}', 'CartController@destroy')->name('cart.delete');
     Route::post('/{product}/update', 'CartController@update')->name('cart.update');
     Route::delete('/', 'CartController@clearCart')->name('cart.clear');
+    Route::get('/checkout', 'CartController@checkout')->name('cart.checkout');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

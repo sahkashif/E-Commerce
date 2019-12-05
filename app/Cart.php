@@ -11,7 +11,7 @@ class Cart
 {
     public $numOfItems=0;
     public $totalPrice=0;
-    private $items = null;
+    public $items = null;
 
     public function _construct(){
 
@@ -26,7 +26,7 @@ class Cart
     }
     
     public function totalPrice(){
-        $this->totalPrice = 0;
+        $this->totalPrice=0;
         foreach($this->items as $item)
         {
             $this->totalPrice = $this->totalPrice + $item->subtotalPrice();

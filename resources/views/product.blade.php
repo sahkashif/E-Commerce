@@ -43,8 +43,8 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="product_d_right">
-                        <form action="#">
-                            
+                        <form method="POST" action="{{ route('cart.add', $product->id) }}">
+                            @csrf
                             <h3><a href="{{ route('shop.product', $product->id) }}">{{ $product->name }}</a></h3>
                             
                             <div class="product_rating">
@@ -80,10 +80,15 @@
 
                                     @endforeach
                                 </ul>
+                                
+                                <input type="hidden" name="color_id" value={{ request()->has('color') ? request()->color : $product->default_color()->id  }}>
+                                
+                                
                             </div>
                             <div class="product_variant quantity">
+                                
                                 <label>quantity</label>
-                                <input min="1" max="100" value="1" type="number">
+                                <input min="1" max="100" value="1" type="number" name="quantity">
                                 <button class="button" type="submit">add to cart</button>  
                                 
                             </div>

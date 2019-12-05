@@ -5,9 +5,12 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
+use Session;
 use Carbon\Carbon;
 use App\Category;
+use App\Image;
 use App\Product;
+use App\Cart;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -41,7 +44,9 @@ class AppServiceProvider extends ServiceProvider
             $product->save();
         }
 
+        $images=Image::all();    
         $categories=Category::all();
-        View::share('categories', $categories);
+        View::share(['categories' => $categories, 'images'=> $images, ]);
+        //View::share('cart' , $cart);
     }
 }

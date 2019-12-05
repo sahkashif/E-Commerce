@@ -10,7 +10,9 @@
                         <i class="fa fa-angle-right"></i></a>
                         <ul class="categories_mega_menu list-group list-group-flush">
                             @foreach ($category->subcategories()->get() as $subcategory)
-                            <li class="menu_item_children center"><a href="{{ route('shop.subcategory', $subcategory->id) }}">{{ $subcategory->name }}</a></li>
+                            <li>
+                                <a href="{{ route('shop.subcategory', $subcategory->id) }}">{{ $subcategory->name }}</a>
+                            </li>
                             @endforeach
                         </ul>
                     @endif

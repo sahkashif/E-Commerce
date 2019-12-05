@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
                                 <div class="product_thumb">
-                                    <a class="primary_img" href="{{ route('shop.product', $product->id) }}"><img src="assets/img/product/product1.jpg" alt=""></a>
+                                    <a class="primary_img" href="{{ route('shop.product', $product->id) }}"><img src="data:image/png;base64,{{ chunk_split(base64_encode($product->imgs()->pluck('img')->first())) }}" alt="No Image Found! Crap as Fuck Man!!"></a>
                                     @if ($product->is_sale() == 1)
                                         <div class="label_product">
                                             <span class="label_sale">Sale!</span>

@@ -70,6 +70,12 @@ class Product extends Model
         return 0;
     }
 
+    //default color_id
+    public function default_color(){
+        $id=$this->colors()->defaultColor()->first();
+        return $id;
+    }
+
     public function scopeThiscategory($query, $category){
         return $query->where('category_id', $category);
     }

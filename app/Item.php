@@ -9,16 +9,18 @@ use Auth;
 
 class Item 
 {
-    private $id=0; 
-    private $totalQty=0;
-    private $item = null;
+    private $id = 0; 
+    private $totalQty = 0;
+    private $color_id = null; 
+    public $item = null;
     private $product_price = 0;
     private $subtotal = 0;
 
-    public function __construct($id, $totalQty, $product_price, $item){
+    public function __construct($id, $totalQty, $product_price, $color_id, $item){
         $this->id=$id;
         $this->totalQty= $totalQty;
         $this->product_price = $product_price;
+        $this->color_id = $color_id;
         $this->item = $item;
         $this->subtotal = $product_price * $totalQty;
        
@@ -38,6 +40,10 @@ class Item
 
     public function getId(){
         return $this->id;
+    }
+
+    public function getColor(){
+        return $this->color_id;
     }
 
     public function getPrice(){
