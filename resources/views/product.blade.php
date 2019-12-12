@@ -59,10 +59,10 @@
                             </div>
                             <div class="price_box">
                                 @if ($product->is_sale()==1)
-                                <span class="current_price">${{ $product->price }}</span>
-                                <span class="old_price">${{ $product->price }}</span>
+                                <span class="current_price">&#2547 {{ $product->price }}</span>
+                                <span class="old_price">&#2547 {{ $product->price }}</span>
                                 @else
-                                <span class="current_price">${{ $product->price }}</span>
+                                <span class="current_price">&#2547 {{ $product->price }}</span>
                                 @endif
                                 
                                 

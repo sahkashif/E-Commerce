@@ -1908,11 +1908,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .main_menu nav > ul > li .mega_menu {
   position: absolute;
   min-width: 100%;
+  width: 100%;
   padding: 25px 30px 30px 30px;
   background: #fff;
   border: 1px solid #ebebeb;
   -webkit-transform: perspective(600px) rotateX(-90deg);
-  transform: perspective(600px) rotateX(-90deg);
+  transform: perspective(auto) rotateX(-90deg);
   -webkit-transform-origin: 0 0 0;
   transform-origin: 0 0 0;
   left: 0;
@@ -1931,8 +1932,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   justify-content: space-between;
 }
 .mega_menu_inner > li > a {
-  font-size: 14px;
-  line-height: 24px;
+  font-size: 15px;
+  line-height: 15px;
   text-transform: capitalize;
   font-weight: 500;
   display: block;
@@ -8378,6 +8379,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   font-weight: 500;
   margin-bottom: 11px;
   line-height: 14px;
+  text-align: center;
 }
 .services_content p {
   font-size: 14px;

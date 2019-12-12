@@ -1,10 +1,29 @@
 @extends('layouts.app')
 @section('content')
+@php
+    use App\ShippingMethod;
+@endphp
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area mt-45">
+    <div class="container">   
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content">
+                    <ul>
+                        <li><a href="/">home</a></li>
+                        <li><a href="{{ route('shop.index') }}">store</a></li>
+                        <li>cart</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>         
+</div>
+<!--breadcrumbs area end-->
 <!--shopping cart area start -->
 <div class="shopping_cart_area mt-45">
     <div class="container">  
-        <form action="{{ route('checkout.index') }}" method="POST">
-            @csrf 
+        
             <div class="row">
                 <div class="col-12">
                     <div class="table_desc">
@@ -50,63 +69,44 @@
             </div>
                 <!--coupon code area start-->
             <div class="coupon_area">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="coupon_code left">
-                            <h3>Coupon</h3>
-                            <div class="coupon_inner">   
-                                <p>Enter your coupon code if you have one.</p>                                
-                                <input placeholder="Coupon code" type="text">
-                                <button type="submit">Apply coupon</button>
-                            </div>    
+                <form action="{{ route('checkout.index') }}" method="get">
+                    @csrf 
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="coupon_code left">
+                                <h3>Shipping Method</h3>
+                                <div class="coupon_inner">
+                                    
+                                    @foreach ($shipping_methods as $item)
+                                    <div class="panel-default">
+                                        <input id="shipping" name="shippingMethod" type="radio" value="{{ $item->id }}" {{ Session::has('shipping') ? 'disabled':'required'}}/>
+                                        <label for="shipping">{{ $item->slug }}</label>
+                                    </div>  
+                                    @endforeach
+                                </div>    
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="coupon_code right">
-                            <h3>Cart Totals</h3>
-                            <div class="coupon_inner">
-                                <div class="cart_subtotal ">
-                                    <div class="btn-group btn-group-toggle">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="shipping" id="inlineRadio1" value="200" required>
-                                            <label class="form-check-label"><h4 class="h6 text-dark">Inside Dhaka</h4></label>
-                                        </div>
-                                                
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="shipping" id="inlineRadio2" value="300">
-                                            <label class="form-check-label"><h4 class="h6 text-dark">Outside Dhaka</h4></label>
-                                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="coupon_code right">
+                                <h3>Cart Totals</h3>
+                                <div class="coupon_inner">
+                                    <div class="cart_subtotal">
+                                        <p>Subtotal</p>
+                                        <p class="cart_amount">&#2547 {{ $total }}</p>
                                     </div>
-                                </div>
-                                <hr>
-                                <div class="cart_subtotal">
-                                    <p>Subtotal</p>
-                                    <p class="cart_amount">&#2547 {{ $total }}</p>
-                                </div>
-                                <div class="cart_subtotal">
-                                    <p>Shipping</p>
-                                    <p class="cart_amount" id="ship">Please Select a Shipping Area</p>
-                                </div>
-                                
-                               
-                               <hr>
-    
-                                <div class="cart_subtotal">
-                                    <p>Total</p>
-                                    <p class="cart_amount" id="total">&#2547 {{ $total }}</p>
-                                </div>
-                                <input type="hidden" name="total" id="total-hidden" value="">
-                                <input type="hidden" name="shippingCharge" id="shippingCharge" value="">
-                                <div class="checkout_btn">
-                                    <button type="submit">Proceed to Checkout</a>
+
+                                    <div class="checkout_btn">
+                                        <button type="submit">Proceed to Checkout</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <hr>
                     </div>
-                </div>
+                </form>
             </div>
             <!--coupon code area end-->
-        </form> 
+        
     </div>     
 </div>
 <!--shopping cart area end -->

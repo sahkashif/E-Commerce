@@ -11,6 +11,7 @@ use App\Item;
 use App\Cart;
 use App\Color;
 use App\Image;
+use App\ShippingMethod;
 use Session;
 use Auth;
 
@@ -24,7 +25,9 @@ class CartController extends Controller
     public function index(Request $request)
     {
         //Session::forget('cart');
+        $shipping_methods = ShippingMethod::active();
         $cart= new Cart;
+        
         if(Session::has('cart'))
         {
             $cart=(Session::get('cart'));
@@ -40,25 +43,10 @@ class CartController extends Controller
                 'products' => $products,
                 'numOfItems' => $numOfItems,
                 'total' => $total,
-                
+                'shipping_methods' => $shipping_methods
                 ]);
         }
-        else
-        {
-            //dd(Session::has('cart'));
-            $products = null;
-            $numOfItems = 0;
-            $total = 0;
-            
-            return view('cart')->with([
-                'products' => $products,
-                'numOfItems' => $numOfItems,
-                'total' => $total,
-                
-                ]);
-        }
-        
-
+        return redirect()->back()->with('error', 'fuck man!! get up!');
         
     }
 
@@ -181,6 +169,9 @@ class CartController extends Controller
 
         if($cart->numOfItems==0){
             Session::forget('cart');
+            if(Session::has('shipping')){
+                Session::forget('shipping');
+            }
             return redirect()->back()->with('success', 'Cart is cleared');
         }
 

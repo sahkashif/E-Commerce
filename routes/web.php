@@ -16,7 +16,7 @@ Route::get('/', 'PagesController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/','MailController@mailVerification');
+//Route::post('/','MailController@mailVerification');
 Route::get('/subscribed/{email}','SubscriptionController@saveEmail');
 
 
@@ -39,8 +39,28 @@ Auth::routes();
 
 
 Route::group(['prefix' => 'checkout',  'middleware' => 'cart'], function(){
-    Route::post('/', 'CheckoutController@index')->name('checkout.index');
-    //Route::put('/scheduler', 'CheckoutController@update')->name('admin.scheduler.update');
+    Route::get('/', 'CheckoutController@index')->name('checkout.index');
+    Route::post('/shipping', 'CheckoutController@store')->name('checkout.shipping');
+    Route::get('/payment-details', 'CheckoutController@create')->name('checkout.payment_details');
 });
-
+Route::group(['prefix' => 'checkout',  'middleware' => 'cart'], function(){
+    Route::get('/', 'CheckoutController@index')->name('checkout.index');
+    Route::post('/shipping', 'CheckoutController@store')->name('checkout.shipping');
+    Route::get('/payment-details', 'CheckoutController@create')->name('checkout.payment_details');
+});
+Route::group(['prefix' => 'checkout',  'middleware' => 'cart'], function(){
+    Route::get('/', 'CheckoutController@index')->name('checkout.index');
+    Route::post('/shipping', 'CheckoutController@shipping')->name('checkout.shipping');
+    Route::get('/payment-details', 'CheckoutController@create')->name('checkout.payment_details');
+    Route::post('/', 'CheckoutController@shipping')->name('checkout.shipping');
+});
+Route::group(['prefix' => 'payment'], function () {
+    Route::group(['prefix' => 'via', 'middleware' => ['cart','shipping']], function () {
+        Route::post('/{slug}', 'PaymentController@cod')->name('payment.via.cod');
+    });
+});
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/services','PagesController@services')->name('services');
+Route::get('/courses','PagesController@courses')->name('courses');
+Route::get('/studios', 'PagesController@studios')->name('studios');
+Route::get('/aboutUs', 'PagesController@aboutUs')->name('aboutUs');

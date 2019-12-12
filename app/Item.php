@@ -50,6 +50,7 @@ class Item
         return $this->product_price;
     }
     public function subtotalPrice(){
+        $this->subtotal = 0;
         $this->subtotal = $this->product_price * $this->totalQty;
         return $this->subtotal;
     }

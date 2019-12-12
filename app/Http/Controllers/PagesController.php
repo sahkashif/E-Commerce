@@ -24,4 +24,19 @@ class PagesController extends Controller
             'hotCategories' => $hotCategories
         ]);
     }
+    public function services(){
+        return view('pages.services');
+    }
+
+    public function courses(){
+        return view('pages.courses');
+    }
+
+    public function studios(){
+        return view('pages.studios');
+    }
+
+    public function aboutUs(){
+        return view('pages.aboutUs');
+    }
 }

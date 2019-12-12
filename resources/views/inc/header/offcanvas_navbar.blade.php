@@ -22,7 +22,7 @@
             @endforeach
         </ul>
     </li>
-    <li class="menu-item-has-children"> <a href="#">Studio</a>
+    <li class="menu-item-has-children"> <a href="/studios">Studio</a>
         <ul class="sub-menu">
             <li><a href="#">Audio & Visual Production</a></li>
             <li><a href="#">Band Desk</a></li>
@@ -32,7 +32,7 @@
         </ul>
     </li>
   
-    <li class="menu-item-has-children"> <a href="#">Services</a>
+    <li class="menu-item-has-children"> <a href="/services">Services</a>
         <ul class="sub-menu">
             <li><a href="#">Custom Shop</a></li>
             <li><a href="#">Guitar Care </a></li>
@@ -43,7 +43,7 @@
             <li><a href="#">Traditional point</a></li>
         </ul>
     </li>
-    <li class="menu-item-has-children"><a href="#">Courses</a>
+    <li class="menu-item-has-children"><a href="/courses">Courses</a>
         <ul class="sub-menu">
             <li><a href="#">Guitar Course</a></li>
             <li><a href="#">Bass Guitar Course</a></li>
@@ -59,7 +59,7 @@
             <li><a href="#">Flutes Course</a></li>
         </ul>
     </li>
-    <li class="menu-item-has-children"><a href="#">About Us</a>
+    <li class="menu-item-has-children"><a href="/aboutus">About Us</a>
         <ul class="sub-menu">
             <li><a href="#">FAQ</a></li>
             <li><a href="#">contact us</a></li>
