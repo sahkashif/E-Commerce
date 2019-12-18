@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\SubCategory;
 
-class CategoryController extends Controller
+class SubcategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.uploader.category')->with('categories', $categories);
+        $subcategories = SubCategory::all();
+        return view('admin.uploader.subcategory')->with('subcategories',$subcategories);
     }
 
     /**
@@ -25,7 +26,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.uploader.categoryUpload');
+        $categories = Category::all();
+        return view('admin.uploader.subcategoryUpload')->with('categories', $categories);
     }
 
     /**
@@ -38,29 +40,23 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'category' => 'required',
             'sku' => 'required',
             'details' => 'required',
             'description' => 'required'
         ]);
-
-        $category = new Category;
-        $category->sku = $request->input('sku');
-        $category->name = $request->input('name');
-        $category->details = $request->input('details');
-        $category->description = $request->input('description');
+        $subcategory = new SubCategory;
+        $category = Category::find($request->input('category'));
+        $subcategory->sku = $request->input('sku');
+        $subcategory->name = $request->input('name');
+        $subcategory->details = $request->input('details');
+        $subcategory->description = $request->input('description');
         if($request->input('active')){
             $category->active = 1;
         }
-       
-        if($request->input('featured')){
-            $category->featured = 1;
-        }
-        
-        if($request->input('hot')){
-            $category->hot = 1;
-        }
-        $category->save();
-        return redirect()->back()->with('success', 'successfully uploaded' );
+        $subcategory->category()->associate($category);
+        $subcategory->save();
+        return redirect()->back()->with('success', 'successfully uploaded');
     }
 
     /**
@@ -105,7 +101,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::find($id)->delete();
-        return redirect()->back()->with('success', 'deleted!!!');
+        //
     }
 }

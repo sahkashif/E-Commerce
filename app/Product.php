@@ -41,6 +41,12 @@ class Product extends Model
         return $query->where('active', 1)->inRandomOrder();
     }
 
+    public function is_active(){
+        if($this->active == 1){
+            return true;
+        }
+        return false;
+    }
     //return query based on sale random products
     public function scopeSaleProducts($query)
     {

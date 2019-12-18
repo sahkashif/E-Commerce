@@ -3,19 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Order;
 use App\Category;
+use App\Subcategory;
+use App\Product;
+use App\Color;
+use App\Image;
 
-class CategoryController extends Controller
+class AdminController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display dashboard of admin.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        $orders = Order::with(['shipping', 'payment_details'])->orderBy('created_at','desc')->paginate(12);
         $categories = Category::all();
-        return view('admin.uploader.category')->with('categories', $categories);
+        $subcategories = SubCategory::all();
+        $products = Product::all();
+        
+        return view('admin.index')->with([
+            'orders' => $orders,
+            'categories' => $categories,
+            'subcategories' => $subcategories,
+            'products' => $products
+        ]);
     }
 
     /**
@@ -25,7 +39,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.uploader.categoryUpload');
+        //
     }
 
     /**
@@ -36,31 +50,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'sku' => 'required',
-            'details' => 'required',
-            'description' => 'required'
-        ]);
-
-        $category = new Category;
-        $category->sku = $request->input('sku');
-        $category->name = $request->input('name');
-        $category->details = $request->input('details');
-        $category->description = $request->input('description');
-        if($request->input('active')){
-            $category->active = 1;
-        }
-       
-        if($request->input('featured')){
-            $category->featured = 1;
-        }
-        
-        if($request->input('hot')){
-            $category->hot = 1;
-        }
-        $category->save();
-        return redirect()->back()->with('success', 'successfully uploaded' );
+        //
     }
 
     /**
@@ -105,7 +95,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::find($id)->delete();
-        return redirect()->back()->with('success', 'deleted!!!');
+        //
     }
 }

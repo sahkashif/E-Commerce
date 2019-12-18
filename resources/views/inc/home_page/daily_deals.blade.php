@@ -15,7 +15,7 @@
                         <article class="single_product">
                             <figure>
                                 <div class="product_name">
-                                    <h4><a href="product-countdown.html">{{ $product->name }}</a></h4>
+                                    <h4><a href="{{ route('shop.product',$product->id) }}">{{ $product->name }}</a></h4>
                                 </div>
                                 <div class="product_rating">
                                     <div class="star-ratings">
@@ -29,7 +29,7 @@
                                 </div>
     
                                 <div class="product_thumb">
-                                    <a class="primary_img" href="product-countdown.html"><img src="assets/img/product/product1.jpg" alt=""></a>
+                                    <a class="primary_img" href="{{ route('shop.product',$product->id) }}"><img src="data:image/png;base64,{{ chunk_split(base64_encode($product->imgs()->pluck('img')->first())) }}" alt="No Image Found! Crap as Fuck Man!!"></a>
                                     <div class="label_product">
                                         <span class="label_sale">Sale!</span>
                                     </div>

@@ -24,7 +24,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product-details-tab">
                         <div id="img-1" class="zoomWrapper single-zoom">
-                            <a href="#">
+                            <a href="{{ route('shop.product',$product->id) }}">
                                 <img id="zoom1" src="data:image/png;base64,{{ chunk_split(base64_encode($imgs->pluck('img')->first())) }}" data-zoom-image="data:image/png;base64,{{ chunk_split(base64_encode($imgs->pluck('img')->first())) }}" alt="big-1">
                             </a>
                         </div>
@@ -32,7 +32,7 @@
                             <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">
                                 @foreach ($imgs->pluck('img') as $image)
                                 <li>
-                                    <a href="#" class="elevatezoom-gallery active" data-update="" data-image="data:image/png;base64,{{ chunk_split(base64_encode($image)) }}" data-zoom-image="data:image/png;base64,{{ chunk_split(base64_encode($image)) }}">
+                                    <a href="{{ route('shop.product',$product->id) }}" class="elevatezoom-gallery active" data-update="" data-image="data:image/png;base64,{{ chunk_split(base64_encode($image)) }}" data-zoom-image="data:image/png;base64,{{ chunk_split(base64_encode($image)) }}">
                                         <img src="data:image/png;base64,{{ chunk_split(base64_encode($image)) }}" alt="zo-th-1"/>
                                     </a>
                                 </li>

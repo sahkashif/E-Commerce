@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
+use Auth;
+use App\Order;
+use App\Events\OrderStatus;
 
-class CategoryController extends Controller
+
+class TestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.uploader.category')->with('categories', $categories);
+        $order = Order::find(37);
+        event(new OrderStatus($order));
+        return view('test');
     }
 
     /**
@@ -25,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.uploader.categoryUpload');
+        //
     }
 
     /**
@@ -36,31 +40,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'sku' => 'required',
-            'details' => 'required',
-            'description' => 'required'
-        ]);
-
-        $category = new Category;
-        $category->sku = $request->input('sku');
-        $category->name = $request->input('name');
-        $category->details = $request->input('details');
-        $category->description = $request->input('description');
-        if($request->input('active')){
-            $category->active = 1;
-        }
-       
-        if($request->input('featured')){
-            $category->featured = 1;
-        }
-        
-        if($request->input('hot')){
-            $category->hot = 1;
-        }
-        $category->save();
-        return redirect()->back()->with('success', 'successfully uploaded' );
+        //
     }
 
     /**
@@ -105,7 +85,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::find($id)->delete();
-        return redirect()->back()->with('success', 'deleted!!!');
+        //
     }
 }

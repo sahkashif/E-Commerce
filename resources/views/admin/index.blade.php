@@ -5,8 +5,7 @@
     use App\Order;
     use App\ShippingDetails;
     use App\PaymentDetails;
-
-    $orders = Auth::user()->orders()->paginate(1);
+    use App\Product;
 @endphp
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area mt-45">
@@ -35,35 +34,109 @@
                     <!-- Nav tabs -->
                     <div class="dashboard_tab_button">
                         <ul role="tablist" class="nav flex-column dashboard-list">
-                            <li><a href="#dashboard" data-toggle="tab" class="nav-link active">Dashboard</a></li>
-                            <li> <a href="#orders" data-toggle="tab" class="nav-link">Orders</a></li>
-                            <li><a href="#downloads" data-toggle="tab" class="nav-link">Downloads</a></li>
-                            <li><a href="#address" data-toggle="tab" class="nav-link">Addresses</a></li>
-                            <li><a href="#account-details" data-toggle="tab" class="nav-link">Account details</a></li>
-                            <li><a href="login.html" class="nav-link">logout</a></li>
+                            <li><a href="#orders" data-toggle="tab" class="nav-link active">Orders</a></li>
+                            <li> <a href="{{ route('category.index') }}" class="nav-link">Categories</a></li>
+                            <li><a href="{{ route('subcategory.index') }}" class="nav-link">Subcategories</a></li>
+                            <li><a href="#products" data-toggle="tab" class="nav-link">Products</a></li>
+                            <li><a href="#transections" data-toggle="tab" class="nav-link">Transection Status</a></li>
                         </ul>
                     </div>    
                 </div>
                 <div class="col-sm-12 col-md-9 col-lg-9">
                     <!-- Tab panes -->
                     <div class="tab-content dashboard_content">
-                        <div class="tab-pane fade show active" id="dashboard">
-                            <h3>Dashboard </h3>
-                            <div class="card-body">
-                                @if (session('status'))
-                                    <div class="alert alert-success" role="alert">
-                                        {{ session('status') }}
+                        <div class="tab-pane fade show active" id="orders">
+                            <h3>Orders </h3>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">P/ID</th>
+                                            <th scope="col">IMG</th>
+                                            <th scope="col">QTY</th>
+                                            <th scope="col">AMOUNT</th>
+                                            <th scope="col">NOTES</th>h 
+                                            <th scope="col">O/STATUS</th>
+                                            <th scope="col">P/STATUS</th>
+                                            <th scope="col">S/STATUS</th>
+                                            <th scope="col">EDIT</th>
+                                            <th scope="col">UPDATE</th>
+                                            <th scope="col">DELETE</th>
+                                            <th scope="col">PRINT</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($orders as $order)
+                                        <tr>
+                                            <th scope="row">{{ $order->id }}</th>
+                                            <td>
+                                                <ul>
+                                                    @foreach ($order->products()->get() as $product)
+                                                        <li>{{ $product->product()->get()->first()->id }}</li>
+                                                        <li>{{ $product->product()->get()->first()->id }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    @foreach ($order->products()->get() as $product)
+                                                    <li>
+                                                        <a href="#" class="elevatezoom-gallery active" data-update="" data-image="data:image/png;base64,{{ chunk_split(base64_encode($product->imgs()->get()->first()->img)) }}" data-zoom-image="data:image/png;base64,{{ chunk_split(base64_encode($product->imgs()->get()->first()->img)) }}">
+                                                            <img src="data:image/png;base64,{{ chunk_split(base64_encode($product->imgs()->get()->first()->img)) }}" alt="zo-th-1"/>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="elevatezoom-gallery active" data-update="" data-image="data:image/png;base64,{{ chunk_split(base64_encode($product->imgs()->get()->first()->img)) }}" data-zoom-image="data:image/png;base64,{{ chunk_split(base64_encode($product->imgs()->get()->first()->img)) }}">
+                                                            <img src="data:image/png;base64,{{ chunk_split(base64_encode($product->imgs()->get()->first()->img)) }}" alt="zo-th-1"/>
+                                                        </a>
+                                                    </li>
+                                                    @endforeach
+                                                </ul> 
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                @foreach ($order->products()->get() as $product)
+                                                    <li>{{ $product->pivot->quantity }}</li>
+                                                    <li>{{ $product->pivot->quantity }}</li>
+                                                @endforeach
+                                                </ul>
+                                            </td>
+                                            
+                                            <td>{{ $order->total }}</td>
+                                            <td><p>{{ $order->notes }}</p></td>
+                                            <td>{{ $order->order_status }}</td>
+                                            <td>{{ $order->payment_details->status }}</td>
+                                            <td>{{ $order->shipping->status }}</td>
+                                            <td>
+                                                <button class="btn-primary">EDIT</button>
+                                            </td>
+                                            <td>
+                                                <button class="btn-success">UPDATE</button>
+                                            </td>   
+                                            <td>
+                                                <button class="btn btn-danger">DELETE</button>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger">PRINT</button>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                        
+                                    </tbody>
+                                </table>
+                                <div class="shop_toolbar t_bottom">
+                                    <div class="pagination">
+                                        {{ $orders->links() }}
                                     </div>
-                                @endif
-                        
-                                You are logged in!
+                                </div>
                             </div>
-                            <p>From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">Edit your password and account details.</a></p>
+                            
                         </div>
-                        <div class="tab-pane fade" id="orders">
+                        <div class="tab-pane fade" id="categories">
                             <h3>Orders</h3>
-                            @if (count($orders) > 0)
-                            @foreach ( $orders as $order)
+                            @if ($orders = Auth::user()->orders())
+                            @foreach ( $orders = Auth::user()->orders()->paginate(1) as $order)
                             <div class="card text-sm-left">
                                 <div class="card-header">
                                     <h6 class="mb-0 font-weight-bold">{{ $order->slug }}</h6>
@@ -100,7 +173,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="downloads">
+                        <div class="tab-pane fade" id="subcategories">
                             <h3>Downloads</h3>
                             <div class="table-responsive">
                                 <table class="table">
@@ -129,7 +202,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane" id="address">
+                        <div class="tab-pane" id="products">
                             <p>The following addresses will be used on the checkout page by default.</p>
                             <h4 class="billing-address">Billing address</h4>
                             <a href="#" class="view">Edit</a>
@@ -144,7 +217,7 @@
                             </address>
                             <p>Bangladesh</p>   
                         </div>
-                        <div class="tab-pane fade" id="account-details">
+                        <div class="tab-pane fade" id="transections">
                             <h3>Account details </h3>
                             <div class="login">
                                 <div class="login_form_container">
@@ -193,16 +266,5 @@
     </div>        	
 </section>			
 <!-- my account end   --> 
-<div class="container">
-    <div class="row justify-content-center">
-            @include('inc.message')
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
 
-                
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

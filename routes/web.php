@@ -59,6 +59,18 @@ Route::group(['prefix' => 'payment'], function () {
         Route::post('/{slug}', 'PaymentController@cod')->name('payment.via.cod');
     });
 });
+
+/*************** ADMIN (UPLOADER) ****************/
+Route::group(['prefix' => 'admin', 'middleware' => ['role:admin','auth']], function () {
+    Route::get('/dash-board', 'AdminController@index');
+    Route::resource('category', 'CategoryController'); 
+    Route::resource('subcategory', 'SubcategoryController');
+    Route::resource('product', 'ProductController');
+});
+
+
+
+Route::get('/test', 'TestController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/services','PagesController@services')->name('services');
 Route::get('/courses','PagesController@courses')->name('courses');
