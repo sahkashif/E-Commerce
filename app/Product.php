@@ -22,7 +22,7 @@ class Product extends Model
 
     //subcategory relationship
     public function subcategory(){
-            return $this->belongsTo('App\SubCategory');
+            return $this->belongsTo('App\SubCategory','sub_category_id');
     }
 
     //review relatioship
@@ -41,10 +41,22 @@ class Product extends Model
         return $query->where('active', 1)->inRandomOrder();
     }
 
+    //return query based 12 active products
+    public function scopeActiveProducts($query)
+    {
+        return $query->where('active', 1);
+    }
+
+    public function is_active(){
+        if($this->active == 1){
+            return true;
+        }
+        return false;
+    }
     //return query based on sale random products
     public function scopeSaleProducts($query)
     {
-        return $query->where('present_price','<', 'price')->randomProducts();
+        return $query->whereColumn('present_price','<', 'price')->randomProducts();
     }
 
     //returns rating of product
@@ -70,6 +82,7 @@ class Product extends Model
         return 0;
     }
 
+    
     //default color_id
     public function default_color(){
         $id=$this->colors()->defaultColor()->first();

@@ -14,7 +14,7 @@
                 <article class="single_categories_product column1">
                     <figure>
                         <div class="product_thumb">
-                            <a class="primary_img" href="shop.html"><img src="assets/img/custom-p/product1.jpg" alt=""></a>
+                            <a class="primary_img" href="shop.html"><img src="{{ asset('img/categories/'.$category->id.'.jpg') }}" alt=""></a>
                         </div>
                         <div class="categories_product_content">
                             <h4><a href="{{ route('shop.index', ['category' => $category->id]) }}">{{ $category->name }}</a></h4>

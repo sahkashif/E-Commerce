@@ -27,35 +27,35 @@
                 <li>
                     <span>
                         <a href="{{ Request::url()."?highPrice=2500" }}">
-                            <span>Under $2500</span>
+                            <span>Under &#2547 2500</span>
                         </a>
                     </span>
                 </li>
                 <li>
                     <span>
                         <a href="{{ Request::url()."?lowPrice=2500&highPrice=5000" }}">
-                            <span>$2500 to $5000</span>
+                            <span>&#2547 2500 to &#2547 5000</span>
                         </a>
                     </span>
                 </li>
                 <li>
                     <span>
                         <a href="{{ Request::url()."?lowPrice=5000&highPrice=10000" }}">
-                            <span>$5000 to $10000</span>
+                            <span>&#2547 5000 to &#2547 10000</span>
                         </a>
                     </span>
                 </li>
                 <li>
                     <span>
                             <a href="{{ Request::url()."?lowPrice=10000&highPrice=20000" }}">
-                            <span>$10000 to $20000</span>
+                            <span>&#2547 10000 to &#2547 20000</span>
                         </a>
                     </span>
                 </li>
                 <li>
                     <span>
                         <a href="{{ Request::url()."?lowPrice=20000" }}">
-                            <span>$20000 &amp; Above</span>
+                            <span>&#2547 20000 &amp; Above</span>
                         </a>
                     </span>
                 </li>

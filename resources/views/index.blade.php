@@ -4,7 +4,7 @@
     <!--slider area start-->
     @include('inc.home_page.slider')
     <!--slider area end-->
-    
+    @include('inc.message')
     <!--shipping area start-->
     <div class="shipping_area mb-50">
         <div class="container">
@@ -15,19 +15,19 @@
                             <img src={{ asset('img/about/shipping1.png') }} alt="">
                         </div>
                         <div class="shipping_content">
-                            <h4>Free Delivery</h4>
-                            <p>Free shipping on all order</p>
+                            <h4>Home Delivery</h4>
+                            <p>Pay at your door step</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="single_shipping">
                         <div class="shipping_icone">
-                            <img src={{ asset('img/about/shipping2.png') }} alt="">
+                            <a href="#"> <img src={{ asset('img/about/shipping2.png') }} alt=""> </a>
                         </div>
                         <div class="shipping_content">
-                            <h4>Online Support 24/7</h4>
-                            <p>Support online 24 hours a day</p>
+                            <h4> <h4>Online Support 24/7</h4>
+                            <p>Support online 24 hours a day</p> </a>
                         </div>
                     </div>
                 </div>
@@ -45,11 +45,11 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="single_shipping">
                         <div class="shipping_icone">
-                            <img src={{ asset('img/about/shipping4.png') }} alt="">
+                            <a href="#"> <img src={{ asset('img/about/shipping4.png') }} alt=""></a>
                         </div>
                         <div class="shipping_content">
-                            <h4>Member Discount</h4>
-                            <p>Onevery order over &#2547 20000.00</p>
+                            <a href="#"> <h4>Member Discount</h4>
+                            <p>Become a member</p> </a>
                         </div>
                     </div>
                 </div>
@@ -86,11 +86,11 @@
         </div>
     </div>
     <!--banner area end-->
-    
-    <!--product area start-->
-    @include('inc.home_page.daily_deals')
-    <!--product area end-->
-    
+
+    <!--Categories product area start-->
+    @include('inc.home_page.hot_categories')
+    <!--Categories product area end-->
+
     <!--banner area start-->
     <div class="banner_area mb-50">
         <div class="container">
@@ -114,18 +114,24 @@
     </div>
     <!--banner area end-->
     
-    <!-- empty space for later use starts-->
+    <!--product area start-->
+    @include('inc.home_page.daily_deals')
+    <!--product area end-->
+    
+    <!---- Youtube banner -->
+    @include('inc.home_page.youtube_banner')
+    <!---- Youtube banner End-->
+
+    
+    
+    <!-- empty space for later use starts
     <div class="product_area product_bg mb-45">
-    </div>
+    </div>-->
     <!--empty space for later use ends-->
     
-    <!--Categories product area start-->
-    @include('inc.home_page.hot_categories')
-    <!--Categories product area end-->
     
-    <!--product area start-->
-    @include('inc.home_page.hot_products')
-    <!--product area end-->
+    
+    
 
    
 @endsection

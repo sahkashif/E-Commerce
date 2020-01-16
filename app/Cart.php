@@ -11,6 +11,9 @@ class Cart
 {
     public $numOfItems=0;
     public $totalPrice=0;
+    public $shippingMethod;
+    public $grandTotal = 0;
+    public $discount = 0;
     public $items = null;
 
     public function _construct(){
@@ -73,7 +76,7 @@ class Cart
         $this->items[$this->numOfItems]=$newItem;
         $this->items[$this->numOfItems]->setId($id);
         $this->numOfItems++;
-        //$this->totalPrice= $this->totalPrice + $newItem->getSubtotalPrice();
+       
 
         return true;
     }

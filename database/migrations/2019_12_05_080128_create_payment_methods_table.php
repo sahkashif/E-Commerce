@@ -15,7 +15,10 @@ class CreatePaymentMethodsTable extends Migration
     {
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('slug');
             $table->string('name');
+            $table->string('description')->nullable();
+            $table->boolean('active')->default(0);
             $table->timestamps();
         });
     }

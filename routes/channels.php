@@ -14,3 +14,7 @@
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+Broadcast::channel('order.{id}', function ($user, $id) {
+    //dd($user->id == Order::find($id)->user_id);
+    return $user->id == Order::find($id)->user_id;
+});

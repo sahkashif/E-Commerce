@@ -10,9 +10,6 @@
                                 <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Description</a>
                             </li>
                             <li>
-                                    <a data-toggle="tab" href="#sheet" role="tab" aria-controls="sheet" aria-selected="false">Specification</a>
-                            </li>
-                            <li>
                                 <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews (1)</a>
                             </li>
                         </ul>
@@ -23,31 +20,7 @@
                                 <p>{{ $product->product_description }}</p>
                             </div>    
                         </div>
-                        <div class="tab-pane fade" id="sheet" role="tabpanel" >
-                            <div class="product_d_table">
-                                <form action="#">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td class="first_child">Compositions</td>
-                                                <td>Polyester</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="first_child">Styles</td>
-                                                <td>Girly</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="first_child">Properties</td>
-                                                <td>Short Dress</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </form>
-                            </div>
-                            <div class="product_info_content">
-                                <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
-                            </div>    
-                        </div>
+                        
 
                         <div class="tab-pane fade" id="reviews" role="tabpanel" >
                             <div class="reviews_wrapper">

@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
                                 <div class="product_thumb">
-                                    <a class="primary_img" href="{{ route('shop.product', $product->id) }}"><img src="data:image/png;base64,{{ chunk_split(base64_encode($product->imgs()->pluck('img')->first())) }}" alt="No Image Found! Crap as Fuck Man!!"></a>
+                                    <a class="primary_img" href="{{ route('shop.product', $product->id) }}"><img src="/storage/images/product/{{ $product->imgs()->pluck('img')->first() }}" alt="No Image Found! Crap as Fuck Man!!"></a>
                                     @if ($product->is_sale() == 1)
                                         <div class="label_product">
                                             <span class="label_sale">Sale!</span>
@@ -79,17 +79,16 @@
                                 <div class="product_footer product_content grid_content">
                                     <div class="price_box">
                                         @if ($product->is_sale() == 1)
-                                            <span class="old_price">${{ $product->price }}</span>
-                                            <span class="current_price">${{ $product->present_price }}</span>
+                                            <span class="old_price">&#2547 {{ $product->price }}</span>
+                                            <span class="current_price">&#2547 {{ $product->present_price }}</span>
                                         @else
-                                            <span class="current_price">${{ $product->price }}</span>
+                                            <span class="current_price">&#2547 {{ $product->price }}</span>
                                         @endif 
                                     </div>
                                     <div class="action_links">
-                                            <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="Add to cart">Add to cart</a></li>
+                                        <ul>
 
-                                            <li class="wishlist"><a href="wishlist.html"  title="Add to Wishlist"><i class="ion-android-favorite-outline"></i></a></li>
+                                            <li class="wishlist"><a href="#"  title="Add to Wishlist"><i class="ion-android-favorite-outline"></i></a></li>
 
                                             <li class="compare"><a href="#" title="Add to Compare"><i class="ion-shuffle"></i></a></li>
                                         </ul>
@@ -112,18 +111,16 @@
                                     <div class="price_box">
                                         @if ($product->is_sale() == 1)
                                             <span class="old_price">${{ $product->price }}</span>
-                                            <span class="current_price">${{ $product->present_price }}</span>
+                                            <span class="current_price">&#2547 {{ $product->present_price }}</span>
                                         @else
-                                            <span class="current_price">${{ $product->price }}</span>
+                                            <span class="current_price">&#2547 {{ $product->price }}</span>
                                         @endif 
                                     </div>
                                     <div class="product_desc">
                                         <p>{{ $product->product_description }}</p>
                                     </div>
                                     <div class="action_links">
-                                            <ul>
-                                            <li class="add_to_cart"><a href="cart.html" title="Add to cart">Add to cart</a></li>
-
+                                        <ul>
                                             <li class="wishlist"><a href="wishlist.html"  title="Add to Wishlist"><i class="ion-android-favorite-outline"></i></a></li>
 
                                             <li class="compare"><a href="#" title="Add to Compare"><i class="ion-shuffle"></i></a></li>
@@ -139,7 +136,7 @@
                     @endforeach
                 </div>
 
-                @if ($products->count() > 12)
+                @if ($products->count() >= 12)
                 <div class="shop_toolbar t_bottom">
                     <div class="pagination">
                         {{ $products->links() }}
