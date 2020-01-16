@@ -73,8 +73,9 @@ class CartController extends Controller
             $quantity=1;
         }
         $price=$product['present_price'];
+        $old_price = $product['price'];
         //dd($price);
-        $newitem=new Item($id, $quantity, $price, $color_id, $product);
+        $newitem=new Item($id, $quantity, $price, $old_price, $color_id, $product);
         //dd($newitem->subtotalPrice());
         $cart=new Cart;
         $oldCart=Session::has('cart') ? Session::get('cart') : $cart;
@@ -172,13 +173,13 @@ class CartController extends Controller
             if(Session::has('shipping')){
                 Session::forget('shipping');
             }
-            return redirect()->back()->with('success', 'Cart is cleared');
+            return redirect('/shop')->with('success', 'Product is been removed');
+        }else{
+            $cart->setitems($items);
+            $request->session()->put('cart',$cart);
+            return redirect()->back()->with('success', 'Product is been removed');
         }
 
-        $cart->setitems($items);
-        $request->session()->put('cart',$cart);
-        return redirect()->back()->with('success', 'Product is been removed');
-        
     }
 
    

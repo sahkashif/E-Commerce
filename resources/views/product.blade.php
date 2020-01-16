@@ -25,15 +25,15 @@
                     <div class="product-details-tab">
                         <div id="img-1" class="zoomWrapper single-zoom">
                             <a href="{{ route('shop.product',$product->id) }}">
-                                <img id="zoom1" src="data:image/png;base64,{{ chunk_split(base64_encode($imgs->pluck('img')->first())) }}" data-zoom-image="data:image/png;base64,{{ chunk_split(base64_encode($imgs->pluck('img')->first())) }}" alt="big-1">
+                                <img id="zoom1" src="/storage/images/product/{{ $imgs->pluck('img')->first() }}" data-zoom-image="/storage/images/product/{{ $imgs->pluck('img')->first() }}" alt="big-1">
                             </a>
                         </div>
                         <div class="single-zoom-thumb">
                             <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">
                                 @foreach ($imgs->pluck('img') as $image)
                                 <li>
-                                    <a href="{{ route('shop.product',$product->id) }}" class="elevatezoom-gallery active" data-update="" data-image="data:image/png;base64,{{ chunk_split(base64_encode($image)) }}" data-zoom-image="data:image/png;base64,{{ chunk_split(base64_encode($image)) }}">
-                                        <img src="data:image/png;base64,{{ chunk_split(base64_encode($image)) }}" alt="zo-th-1"/>
+                                    <a href="{{ route('shop.product',$product->id) }}" class="elevatezoom-gallery active" data-update="" data-image="/storage/images/product/{{ $image }}" data-zoom-image="/storage/images/product/{{ $image }}">
+                                        <img src="/storage/images/product/{{ $image }}" alt="zo-th-1"/>
                                     </a>
                                 </li>
                                 @endforeach
@@ -59,7 +59,7 @@
                             </div>
                             <div class="price_box">
                                 @if ($product->is_sale()==1)
-                                <span class="current_price">&#2547 {{ $product->price }}</span>
+                                <span class="current_price">&#2547 {{ $product->present_price }}</span>
                                 <span class="old_price">&#2547 {{ $product->price }}</span>
                                 @else
                                 <span class="current_price">&#2547 {{ $product->price }}</span>
@@ -92,17 +92,20 @@
                                 <button class="button" type="submit">add to cart</button>  
                                 
                             </div>
+                        </form>
                             <div class=" product_d_action">
                                 <ul>
-                                    <li><a href="#" title="Add to wishlist">+ Add to Wishlist</a></li>
+                                    <li>
+                                        <a href="{{ route('wishlist.store', $product->id) }}" title="Add to wishlist">+ Add to Wishlist</a>
+                                    </li>
                                     <li><a href="#" title="Add to wishlist">+ Compare</a></li>
                                 </ul>
                             </div>
                             <div class="product_meta">
-                                <span>Category: <a href="#">Clothing</a></span>
+                                <span>Category: <a href="{{ route('shop.category',$product->category->id) }}">{{ $product->category->name }}</a></span>
                             </div>
                             
-                        </form>
+                        
                         <div class="priduct_social">
                             <ul>
                                 <li><a class="facebook" href="#" title="facebook"><i class="fa fa-facebook"></i> Like</a></li>           

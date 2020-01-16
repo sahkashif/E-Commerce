@@ -78,7 +78,10 @@ class SubcategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $subcategory = SubCategory::find($id);
+        return view('admin.edit.subcategory')->with([
+            'subcategory' => $subcategory
+        ]);
     }
 
     /**
@@ -90,7 +93,7 @@ class SubcategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -101,6 +104,7 @@ class SubcategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        SubCategory::find($id)->delete();
+        return redirect()->back()->with('success', 'deleted!!!');
     }
 }

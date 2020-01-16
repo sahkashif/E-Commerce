@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('content')
+@extends('layouts.dashboard')
+@section('dashboard_content')
 <br>
 <div class="card">
     <div class="card-body">

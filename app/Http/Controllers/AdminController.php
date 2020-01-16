@@ -9,6 +9,7 @@ use App\Subcategory;
 use App\Product;
 use App\Color;
 use App\Image;
+use Auth;
 
 class AdminController extends Controller
 {

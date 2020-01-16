@@ -13,6 +13,7 @@ class Cart
     public $totalPrice=0;
     public $shippingMethod;
     public $grandTotal = 0;
+    public $discount = 0;
     public $items = null;
 
     public function _construct(){

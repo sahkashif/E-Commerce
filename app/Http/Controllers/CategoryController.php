@@ -82,7 +82,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return view('admin.edit.category')->with([
+            'category' => $category
+        ]);
     }
 
     /**
@@ -94,7 +97,24 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+        $category->sku = $request->input('sku');
+        $category->name = $request->input('name');
+        $category->details = $request->input('details');
+        $category->description = $request->input('description');
+        if($request->input('active')){
+            $category->active = 1;
+        }
+       
+        if($request->input('featured')){
+            $category->featured = 1;
+        }
+        
+        if($request->input('hot')){
+            $category->hot = 1;
+        }
+        $category->save();
+        return redirect('admin/category')->with('success', 'updated');
     }
 
     /**

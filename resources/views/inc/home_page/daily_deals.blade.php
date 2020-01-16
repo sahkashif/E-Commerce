@@ -29,7 +29,7 @@
                                 </div>
     
                                 <div class="product_thumb">
-                                    <a class="primary_img" href="{{ route('shop.product',$product->id) }}"><img src="data:image/png;base64,{{ chunk_split(base64_encode($product->imgs()->pluck('img')->first())) }}" alt="No Image Found! Crap as Fuck Man!!"></a>
+                                    <a class="primary_img" href="{{ route('shop.product',$product->id) }}"><img src="storage/images/product/{{ $product->imgs()->pluck('img')->first() }}" alt="No Image Found! Crap as Fuck Man!!"></a>
                                     <div class="label_product">
                                         <span class="label_sale">Sale!</span>
                                     </div>
@@ -38,8 +38,8 @@
                                     </div>
                                 </div>
                                 <div class="price_box"> 
-                                    <span class="old_price">${{ $product->price }}</span> 
-                                    <span class="current_price">${{ $product->present_price }}</span>
+                                    <span class="old_price">&#2547 {{ $product->price }}</span> 
+                                    <span class="current_price">&#2547 {{ $product->present_price }}</span>
                                 </div>
                                 <div class="product_timing">
                                     <div data-countdown="{{ $product->sale_ended_at }}"></div>

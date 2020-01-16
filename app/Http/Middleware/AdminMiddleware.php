@@ -15,10 +15,10 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next, $role)
     {
-        if (! $request->user()->hasRole($role)) {
-            return redirect('/')->with('error','Unauthorized Access!');
+        if ($request->user()->hasRole($role)) {
+            return $next($request);
         }
-
-        return $next($request);
+        return redirect('/')->with('error','Unauthorized Access!');
+        
     }
 }

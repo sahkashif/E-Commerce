@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('content')
+@extends('layouts.dashboard')
+@section('dashboard_content')
 <br><br>
 <div class="container">
     <div class="row justify-content-center">
@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header"><h5 class="h5">Product Upload </h5></div>
                 <div class="card-body">
-                    <form action="{{ route('product.store') }}" method="POST">
+                    <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                           <h6 class="h6">Category</h6>
                         <hr>

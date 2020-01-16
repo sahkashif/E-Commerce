@@ -20,11 +20,11 @@
            @foreach (Session::get('cart')->getitems() as $item)
            <div class="cart_item">
                 <div class="cart_img">
-                    <a href="{{ route('shop.product', $item->getItem()['id']) }}"><img src="data:image/png;base64,{{ chunk_split(base64_encode($images->where('product_id', $item->getItem()['id'])->where('color_id',$item->getColor()->toArray()['id'])->pluck(['img'])->first())) }}" alt=""></a>
+                    <a href="{{ route('shop.product', $item->getItem()['id']) }}"><img src="/storage/images/product/{{ $images->where('product_id', $item->getItem()['id'])->where('color_id',$item->getColor()->toArray()['id'])->pluck(['img'])->first() }}" alt=""></a>
                 </div>
                 <div class="cart_info">
                     <a href="{{ route('shop.product', $item->getItem()['id']) }}">{{ $item->getItem()['name'] }}</a>
-                    <p>Qty: {{ $item->getQty() }} X <span> ${{ $item->getItem()['present_price'] }} </span></p>    
+                    <p>Qty: {{ $item->getQty() }} X <span> &#2547 {{ $item->getItem()['present_price'] }} </span></p>    
                 </div>
                 <form class="cart_remove" action="{{ route('cart.delete', $item->getItem()['id']) }}" method="POST">
                     @csrf

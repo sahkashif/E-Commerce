@@ -3601,7 +3601,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   transition: 0.3s;
 }
 .product_carousel .owl-nav div:hover {
-  color: #2e6ed5;
+  color: #5a060d;
 }
 .product_carousel .owl-nav div.owl-prev {
   margin-right: 13px;
@@ -3718,10 +3718,10 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   display: block;
 }
 .product_tab_btn ul li a:hover {
-  color: #2e6ed5;
+  color:  #c00;
 }
 .product_tab_btn ul li a.active {
-  color: #2e6ed5;
+  color:  #c00;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -10599,3 +10599,18 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   z-index: 0;
 }
 
+.o-date{
+  font-size: small;
+  font-weight: bold;
+  font-variant-caps: all-petite-caps;
+}
+.o-date-m{
+  font-size: large;
+  font-weight: bolder;
+  color: red;
+}
+
+.order_img{
+  width: 100px;
+  height: 100px;
+}

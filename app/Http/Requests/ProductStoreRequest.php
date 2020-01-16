@@ -39,10 +39,10 @@ class ProductStoreRequest extends FormRequest
             'sale_start_at' => 'nullable|required_if:present_price,',
             'sale_end_at' => 'nullable|required_if:present_price,|after_or_equal:sale_start_date',
             'color' => 'required',
-            'img-1' => 'required',
-            'img-2' => 'required',
-            'img-3' => 'required',
-            'img-4' => 'required'
+            'img-1' => 'required|max:1999',
+            'img-2' => 'nullable|max:1999',
+            'img-3' => 'nullable|max:1999',
+            'img-4' => 'nullable|max:1999'
         ];
     }
 }

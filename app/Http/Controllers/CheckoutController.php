@@ -28,13 +28,23 @@ class CheckoutController extends Controller
      */
     public function index(Request $request)
     {
+        $discount = 0;
         if(Session::has('shipping')){
             return redirect('/checkout/payment-details');
         }
+
         $paymentMethods = PaymentMethod::all();
         $cart = Session::get('cart');
         $cart->shippingMethod = $request->input('shippingMethod');
         $shippingMethod = ShippingMethod::find($request->input('shippingMethod'));
+
+        //billing
+        foreach($cart->getItems() as $item){
+            if($item->getPrice() < $item->getOld_price()){
+                $discount = $item->getOld_price() - $item->getPrice();
+                $cart->discount += $discount;
+            }
+        }
         $cart->grandTotal = $cart->totalPrice()+$shippingMethod->charge;
         $request->session()->put('cart',$cart);
 

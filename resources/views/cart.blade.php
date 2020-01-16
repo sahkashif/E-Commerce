@@ -44,15 +44,18 @@
                                     @foreach ($products as $product)
                                     <tr>
                                         <td class="product_remove">
-                                            
-                                                <button type="submit"><i class="fa fa-trash-o"></i></button>
-                                            
-                                            
+                                            <form action="{{ route('cart.delete', $product->getItem()['id']) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="close" type="submit" class="icon-cancel">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </form>
                                         </td>
-                                        <td class="product_thumb"><a href="#"><img src="data:image/png;base64,{{ chunk_split(base64_encode($images->where('product_id', $product->getItem()['id'])->where('color_id',$product->getColor()->toArray()['id'])->pluck(['img'])->first())) }}" alt=""></a></td>
+                                        <td class="product_thumb"><a href="#"><img src="/storage/images/product/{{ ($images->where('product_id', $product->getItem()['id'])->where('color_id',$product->getColor()->toArray()['id'])->pluck(['img'])->first()) }}" alt=""></a></td>
                                         <td class="product_name"><a href="#">{{ $product->getItem()['name'] }}</a></td>
                                         <td class="product-price">&#2547 {{ $product->getItem()['present_price'] }}</td>
-                                        <td class="product_quantity"><label>Quantity</label> <input min="1" max="10" value="{{ $product->getQty() }}" type="number"></td>
+                                        <td class="product_quantity"><label>Quantity</label> <input min="1" max="10" value="{{ $product->getQty() }}" type="number" readonly></td>
                                         <td class="product_total">&#2547 {{ $product->subtotalPrice() }}</td>
                                     </tr>
                                     @endforeach
@@ -61,9 +64,7 @@
                                 </tbody>
                             </table>   
                         </div>  
-                        <div class="cart_submit">
-                            <button type="submit">update cart</button>
-                        </div>      
+                            
                     </div>
                 </div>
             </div>

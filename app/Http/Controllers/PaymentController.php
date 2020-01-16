@@ -120,7 +120,8 @@ class PaymentController extends Controller
         $order->user_id = Auth::user()->id;
         $order->num_of_items = $cart->numOfItems;
         $order->sub_total = $cart->grandTotal;
-        $order->discount = 0;
+        //dd($cart->grandTotal);
+        $order->discount = $cart->discount;
         $order->total = $cart->grandTotal;
         $order->save();
         foreach($cart->getitems() as $item){
